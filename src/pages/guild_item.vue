@@ -1,11 +1,15 @@
 <template>
   <q-page >
     <div class="container">
-      <h1 class="text-white text-h3">{{guild.name}}</h1>
+      <div class="flex items-center justify-between">
+         <h1 class="text-white text-h3">{{guild.name}}</h1>
+        <p v-if="guild.discord_link" class="q-mb-none text-h6 text-primary"><a class="text-primary" target="_blank" :href="guild.discord_link">Ссылка на Discord</a></p>
+      </div>
+
 
       <div class="container">
         <div v-if="guild.image" class="text-center q-mb-lg">
-          <img :src="guild.image" alt="">
+          <q-img :ratio="16/9" :src="guild.image" alt=""/>
         </div>
         <div class="post-content" v-html="guild.description"></div>
         <q-separator spaced="lg"/>

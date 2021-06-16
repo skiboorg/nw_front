@@ -64,7 +64,6 @@
         <div class=""></div>
         <q-space/>
 
-
         <q-btn
           flat
           dense
@@ -78,12 +77,40 @@
       </q-toolbar>
       <q-list  dark >
         <q-item clickable v-ripple >
-          <q-item-section>
-            l;l
+          <q-item-section @click="$router.push('/news')">
+           Новости
           </q-item-section>
         </q-item>
-
-
+         <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/companies')">
+           Компании
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/guides')">
+           Гайды
+          </q-item-section>
+        </q-item>
+        <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/faq')">
+           FAQ
+          </q-item-section>
+        </q-item>
+         <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/skills')">
+           Калькулятор
+          </q-item-section>
+        </q-item>
+          <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/map')">
+           Карта
+          </q-item-section>
+        </q-item>
+             <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/trade')">
+           Биржа
+          </q-item-section>
+        </q-item>
         <q-separator/>
 
 

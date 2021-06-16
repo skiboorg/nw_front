@@ -30,7 +30,7 @@
     <div class="container">
       <div class="page-wrapper">
         <div class="page-left">
-          <div class="flex items-center">
+          <div class="flex items-center no-wrap">
             <q-icon size="30px" class="q-mr-md" color="primary" name="campaign" />
             <h3 class="text-h5">Последние новости New World</h3>
           </div>

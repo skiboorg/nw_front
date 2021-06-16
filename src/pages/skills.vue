@@ -7,7 +7,7 @@
       <q-tab-panels v-model="panel" animated class="bg-dark">
 
         <q-tab-panel name="choose">
-          <div class="flex items-center q-pt-lg">
+          <div class="flex items-center q-pt-lg no-wrap">
             <q-icon size="30px" class="q-mr-md" color="primary" name="perm_data_setting" />
             <h3 class="text-h5">Калькулятор умений <span class="text-caption">версия 0.1</span></h3>
           </div>
@@ -555,5 +555,27 @@ export default {
   margin: 0 auto
   text-align: center
 
+@media (max-width: 850px)
+  .skill-tree
+    &__item
+      width: 40px
+      height: 40px
+      img
+        width: 35px
+        height: 35px
+      &.active-skill
+        width: 65px
+        height: 65px
+        img
+          width: 50px
+          height: 50px
+  .weapon-grid
+    grid-template-columns: 1fr 1fr
+  .skills-wrapper
+    grid-template-columns: 1fr
+
+@media (max-width: 640px)
+  .weapon-grid
+    grid-template-columns: 1fr
 
 </style>

@@ -27,6 +27,11 @@ const actions = {
       const response = await api.post('/auth/token/login/',data)
      this._vm.$cook.set('auth_token',response.data.auth_token)
        api.defaults.headers.common['Authorization'] = 'Token ' + response.data.auth_token
+      Notify.create({
+        message:'Успешная авторизация',
+        color:'positive',
+        position: Screen.lt.sm ? 'bottom' : 'bottom-right',
+      })
        dispatch('getUser')
     }catch (e){
       console.log(e)
@@ -42,6 +47,7 @@ const actions = {
     console.log('getUser', response)
     commit('updateUser', response.data)
     commit('updateUserStatus', true)
+    this.dispatch('componentState/changeauthModalVisible',false)
 
   },
   logoutUser({commit}){

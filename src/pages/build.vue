@@ -233,5 +233,23 @@ export default {
   margin: 0 auto
   text-align: center
 
+@media (max-width: 850px)
+  .skill-tree
+    &__item
+      width: 40px
+      height: 40px
+      img
+        width: 35px
+        height: 35px
+      &.active-skill
+        width: 65px
+        height: 65px
+        img
+          width: 50px
+          height: 50px
+  .weapon-grid
+    grid-template-columns: 1fr 1fr
+  .skills-wrapper
+    grid-template-columns: 1fr
 
 </style>

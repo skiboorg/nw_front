@@ -1,6 +1,27 @@
 <template>
-<q-page class="flex flex-center">
-  <p>В разработке</p>
+<q-page >
+  <div class="container">
+
+          <div class="flex items-center  q-py-lg">
+            <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
+            <h1 class="text-h5">Гайды New World</h1>
+
+
+          </div>
+    <div class="" v-for="category in categories" :key="category.id">
+      <h3 class="text-h6">{{category.name}}</h3>
+      <q-separator spaced="lg"/>
+       <div class="companies-grid">
+        <GuideCard
+          v-for="guide in category.guides"
+          :key="guide.id"
+          :item = "guide"
+        />
+      </div>
+    </div>
+
+
+        </div>
 </q-page>
 </template>
 
@@ -8,11 +29,13 @@
 
 
 
+import GuideCard from "components/GuideCard";
 export default {
   name: 'MainLayout',
+  components: {GuideCard},
   meta: {
     // sets document title
-    title: 'New World Fans | Биржа',
+    title: 'New World Fans | Гайды',
 
 
     // meta tags
@@ -26,7 +49,7 @@ export default {
         name: 'og:title',
         // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `${ogTitle} - My Website`
+          return `New World Fans | Гайды`
         }
       }
     }
@@ -34,10 +57,14 @@ export default {
 
   data () {
     return {
-      slide:'first',
-      autoplay:true
+      categories:[]
 
     }
+  },
+  async mounted() {
+    const response = await this.$api.get('/api/guide/guides')
+    this.categories = response.data
+
   },
   methods:{
 
@@ -46,10 +73,9 @@ export default {
 }
 </script>
 <style lang="sass" scoped>
-.custom-caption
-  text-align: center
-  padding: 12px
-  color: white
-  background-color: rgba(0, 0, 0, .3)
+.companies-grid
+  display: grid
+  grid-template-columns: repeat(auto-fill,minmax(300px,1fr))
+  grid-gap: 20px
 
 </style>

@@ -1,26 +1,14 @@
 <template>
 <q-page >
+   <q-parallax :height="300" :speed="1" class="q-mb-lg">
+      <template v-slot:media>
+        <img :src="post.image" :alt="post.name">
+      </template>
+
+      <h1 class="text-white text-h3">{{post.name}}</h1>
+    </q-parallax>
   <div class="container">
-    <div class="flex items-center q-py-lg">
-            <q-icon size="30px" class="q-mr-md" color="primary" name="help" />
-            <h3 class="text-h5">FAQ</h3>
-          </div>
-    <q-list dark padding  class="rounded-borders" style="max-width: 100%">
-      <q-expansion-item
-        group="somegroup"
-        v-for="faq in faqs"
-        :key="faq.id"
-        :label="faq.question"
-      >
-        <q-card class="bg-grey-9">
-          <q-card-section v-html="faq.answer">
-
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-
-
-    </q-list>
+    <div class="post-content" v-html="post.description"></div>
   </div>
 </q-page>
 </template>
@@ -33,7 +21,7 @@ export default {
   name: 'MainLayout',
   meta: {
     // sets document title
-    title: 'New World Fans | FAQ',
+    title: `New World Fans | Гайды игры`,
 
 
     // meta tags
@@ -47,7 +35,7 @@ export default {
         name: 'og:title',
         // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `New World Fans | FAQ`
+          return `New World Fans | Гайды игры`
         }
       }
     }
@@ -55,13 +43,14 @@ export default {
 
   data () {
     return {
-      faqs:[]
+
+      post:{}
 
     }
   },
   async mounted() {
-    const response = await this.$api.get('/api/faq')
-    this.faqs = response.data
+    const response_post = await this.$api.get(`/api/guide/guide?slug=${this.$route.params.slug}`)
+    this.post = response_post.data
 
   },
   methods:{
@@ -70,7 +59,9 @@ export default {
 
 }
 </script>
-<style lang="sass" scoped>
-
-
+<style lang="sass">
+.post-content
+  img
+    max-width: 100% !important
+    height: auto !important
 </style>

@@ -1,7 +1,7 @@
 <template>
     <q-card
            dark
-           class="bg-grey-10 shadow-2 "
+           class="bg-grey-10 shadow-2 q-mb-md"
 
          >
       <q-card-section horizontal>

@@ -132,7 +132,7 @@ export default {
         name: 'og:title',
         // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `${ogTitle} - New World Fans | Калькулятор умений`
+          return `New World Fans | Калькулятор умений`
         }
       }
     }

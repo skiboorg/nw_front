@@ -71,7 +71,7 @@ export default {
   name: 'MainLayout',
   meta: {
     // sets document title
-    title: `New World Fans | Новости игры`,
+    title: `New World Fans | Билды`,
 
 
     // meta tags
@@ -85,7 +85,7 @@ export default {
         name: 'og:title',
         // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `${ogTitle} - My Website`
+          return `New World Fans | Билды`
         }
       }
     }

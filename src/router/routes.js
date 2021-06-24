@@ -19,7 +19,8 @@ const routes = [
       { path: 'guides/:slug', component: () => import('pages/guilde_item.vue') },
       { path: 'news', component: () => import('pages/news.vue') },
       { path: 'news/:slug', component: () => import('pages/news_item.vue') },
-      { path: 'build/:slug', component: () => import('pages/build.vue') },
+      { path: 'builds', component: () => import('pages/builds.vue') },
+      { path: 'builds/:slug', component: () => import('pages/build.vue') },
       { path: 'companies', component: () => import('pages/guilds.vue') },
       { path: 'companies/:slug', component: () => import('pages/guild_item.vue') },
     ]

@@ -67,6 +67,10 @@
             :key="build.name_slug"
             :item="build"
          />
+          <div class="text-center">
+
+            <q-btn to="/skills" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
+          </div>
         </div>
       </div>
     </div>

@@ -1,20 +1,34 @@
 <template>
- <q-card dark class="cursor-pointer q-mb-md">
-   <router-link  :to="`/build/${item.name_slug}`">
+ <q-card dark class="bg-grey-10 cursor-pointer q-mb-md">
+   <router-link  :to="`/builds/${item.name_slug}`">
             <q-card-section>
-              <div class="flex items-center ">
-                <q-avatar square size="100" class="q-mr-md">
-                  <img style="object-fit: contain" :src="img_url+item.weapon.image">
+              <div class="flex items-center justify-between">
+                 <div class="flex items-center ">
+                <q-avatar square size="150" class="q-mr-md">
+                  <img style="object-fit: contain" :src="img_url+item.weapon1.image">
                 </q-avatar>
 
                 <div class="">
-                     <p style="max-width: 260px" class="ellipsis q-mb-sm">{{item.name}}</p>
-                <p class="q-mb-none text-caption">{{item.weapon.name}}</p>
+
+                <p class="q-mb-none text-caption">{{item.weapon1.name}}</p>
                 </div>
 
               </div>
-              <q-separator spaced="md"/>
-              <p>{{item.description}}</p>
+              <div class="flex items-center ">
+                <q-avatar square size="150" class="q-mr-md">
+                  <img style="object-fit: contain" :src="img_url+item.weapon2.image">
+                </q-avatar>
+
+                <div class="">
+
+                <p class="q-mb-none text-caption">{{item.weapon2.name}}</p>
+                </div>
+
+              </div>
+              </div>
+              <p class="text-h6 no-margin text-center">{{item.name}}</p>
+              <q-separator v-if="item.description" spaced="md"/>
+              <p v-if="item.description" class="no-margin">{{item.description}}</p>
             </q-card-section>
    </router-link>
           </q-card>

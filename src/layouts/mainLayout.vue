@@ -29,12 +29,24 @@
                     <router-link class="nav-link" to="/faq">FAQ</router-link>
                   </q-item-section>
                 </q-item>
-
-
-
               </q-list>
             </q-btn-dropdown>
-            <q-route-tab name="calc" label="Калькулятор" to="/skills"/>
+
+             <q-btn-dropdown  auto-close stretch flat label="Калькулятор">
+              <q-list class="bg-grey-9">
+                <q-item clickable>
+                  <q-item-section >
+                    <router-link  class="nav-link" to="/skills">Калькулятор (v0.2)</router-link>
+                  </q-item-section>
+                </q-item>
+                <q-separator/>
+                <q-item clickable>
+                  <q-item-section>
+                    <router-link class="nav-link" to="/builds">Билды</router-link>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
             <q-route-tab name="map" label="Карта" to="/map"/>
             <q-route-tab name="trade" label="Биржа" to="/trade"/>
 

@@ -1,57 +1,10 @@
 <template>
-  <div class="">
-    <q-header elevated  class="bg-dark q-py-md">
-      <q-toolbar >
-        <q-btn
-          flat
-          dense
-          round
-
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title>
-          Параметры карты <span class="text-caption">(версия карты 0.1)</span>
-        </q-toolbar-title>
-        <div class="container flex">
+  <q-page style="overflow: hidden">
+     <q-page-sticky style="z-index: 1000" position="top-left" :offset="[18, 18]">
+            <q-btn @click="leftDrawerOpen = !leftDrawerOpen" fab :icon="leftDrawerOpen ? 'west': 'east'" color="primary" />
+          </q-page-sticky>
 
 
-       <q-tabs :breakpoint="1000" dense v-model="tab" indicator-color="primary" class="gt-sm">
-
-            <q-route-tab name="index" label="Главная" to="/"/>
-            <q-route-tab name="news" label="Новости" to="/news"/>
-            <q-route-tab name="guilds" label="Компании" to="/companies"/>
-            <q-btn-dropdown  auto-close stretch flat label="Информация">
-              <q-list class="bg-grey-9">
-                <q-item clickable>
-                  <q-item-section>
-                    <router-link class="nav-link" to="/guides">Гайды</router-link>
-                  </q-item-section>
-                </q-item>
-                <q-separator/>
-                <q-item clickable>
-                  <q-item-section>
-                    <router-link class="nav-link" to="/faq">FAQ</router-link>
-                  </q-item-section>
-                </q-item>
-
-
-
-              </q-list>
-            </q-btn-dropdown>
-            <q-route-tab name="calc" label="Калькулятор" to="/skills"/>
-            <q-route-tab name="map" label="Карта" to="/map"/>
-            <q-route-tab name="trade" label="Биржа" to="/trade"/>
-
-
-          </q-tabs>
-        </div>
-
-
-      </q-toolbar>
-    </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
@@ -97,7 +50,7 @@
       </q-list>
 
     </q-drawer>
-    <q-page class="flex flex-center">
+
 
       <q-no-ssr>
         <l-map
@@ -164,8 +117,10 @@
         </l-map>
       </q-no-ssr>
 
-    </q-page>
-  </div>
+
+
+  </q-page>
+
 
 </template>
 
@@ -194,7 +149,7 @@ export default {
     return {
       tab:'map',
       leftDrawerOpen: false,
-      is_poi_visible:false,
+      is_poi_visible:true,
       iconSize: [54, 54],
       iconAnchor: [16, 37],
       pois:[{
@@ -217,9 +172,9 @@ export default {
       ],
       url: "https://newworldfans.com/tiles/{z}/map_y{y}_x{x}.jpg",
 
-      zoom:{ position: "topright" },
-      minZoom:0,
-      maxZoom:6,
+      zoom:{ position: "center" },
+      minZoom:1,
+      maxZoom:5,
       attributionControl: !1,
       zoomControl: !1,
       preferCanvas: !0,
@@ -227,7 +182,7 @@ export default {
       tileSize:1024,
 
 
-      bounds: [[0,0],[14336,14336]],
+      bounds: [[-5000,7000],[14336,14336]],
       //crs: !process.env.SERVER ? this.$crs.Simple : null,
       crs:
         !process.env.SERVER ?
@@ -244,6 +199,7 @@ export default {
     const response_types = await this.$api.get('/api/map/resourse')
     this.categoryTypes = response_types.data
     console.log(this.pois)
+
 
   },
   methods:{

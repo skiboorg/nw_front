@@ -5,37 +5,17 @@
         <q-toolbar class="flex items-center">
           <q-toolbar-title >
             <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap" to="/">
-              <p class="q-mb-none q-mr-xs">NW</p>
-              <img class="logo  q-mr-xs" src="~assets/new-world-1.png" alt="">
-              <p class="q-mb-none">FANS</p>
+              <p class="q-mb-none q-mr-xs">DKP</p>
+
             </router-link>
           </q-toolbar-title>
 
           <q-tabs :breakpoint="1000" dense v-model="tab" indicator-color="primary" class="gt-sm">
 
-            <q-route-tab name="news" label="Новости" to="/news"/>
-            <q-route-tab name="guilds" label="Компании" to="/companies"/>
-            <q-btn-dropdown  auto-close stretch flat label="Информация">
-              <q-list class="bg-grey-9">
-                <q-item clickable>
-                  <q-item-section >
-                    <router-link  class="nav-link" to="/guides">Гайды</router-link>
-                  </q-item-section>
-                </q-item>
-                <q-separator/>
-                <q-item clickable>
-                  <q-item-section>
-                    <router-link class="nav-link" to="/faq">FAQ</router-link>
-                  </q-item-section>
-                </q-item>
+            <q-route-tab name="news" label="Главная" to="/dkp"/>
+            <q-route-tab v-if="$user.loggedIn" name="guilds" label="События" to="/companies"/>
+            <q-route-tab v-if="$user.loggedIn && $user.user.is_leader" name="calc" label="Админка" to="/dkp/admin"/>
 
-
-
-              </q-list>
-            </q-btn-dropdown>
-            <q-route-tab name="calc" label="Калькулятор" to="/skills"/>
-            <q-route-tab name="map" label="Карта" to="/map"/>
-            <q-route-tab name="trade" label="Биржа" to="/trade"/>
 
 
           </q-tabs>
@@ -130,7 +110,7 @@ export default {
   name: 'MainLayout',
    meta: {
     // sets document title
-    title: 'Карта объектов New World',
+    title: 'DKP',
 
 
     // meta tags
@@ -143,7 +123,7 @@ export default {
         name: 'og:title',
         // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `${ogTitle} - My Website`
+          return `DKP`
         }
       }
     }
@@ -157,6 +137,7 @@ export default {
 
     }
   },
+
   methods:{
     ...mapActions('componentState',['changePoiVisible']),
   },

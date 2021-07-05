@@ -5,7 +5,8 @@
 
 // Configuration for your app
 // https://v1.quasar.dev/quasar-cli/quasar-conf-js
-
+const BASE_URL = 'http://localhost:8000'
+const BASE_URL_WS = 'ws://localhost:8000'
 module.exports = function (/* ctx */) {
   return {
     // https://v1.quasar.dev/quasar-cli/supporting-ts
@@ -59,7 +60,9 @@ module.exports = function (/* ctx */) {
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
         // API: 'http://91.210.171.192:8000'
-        API: 'http://localhost:8000'
+
+        API: BASE_URL,
+        WS: BASE_URL_WS,
       },
 
       // transpile: false,

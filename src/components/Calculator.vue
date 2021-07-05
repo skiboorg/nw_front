@@ -175,6 +175,7 @@ export default {
         if (i.row===row_index){
           i.is_can_check = false
           i.is_checked = false
+
         }
       }
       // for (let x in this.tree_left_rows){
@@ -251,39 +252,43 @@ export default {
 
 },
     tree_left_row0(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(2,0)
       }
       if(val===0){
         this.setRowInActive(2,0)
+
       }
     },
     tree_left_row1(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(3,0)
       }
       if(val===0){
         this.setRowInActive(3,0)
+
       }
     },
     tree_left_row2(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(4,0)
       }
       if(val===0){
         this.setRowInActive(4,0)
+
       }
     },
     tree_left_row3(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(5,0)
       }
       if(val===0){
         this.setRowInActive(5,0)
+
       }
     },
     points_spent_left(val){
@@ -296,7 +301,7 @@ export default {
     },
     //-----
     tree_right_row0(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(2,1)
       }
@@ -305,7 +310,7 @@ export default {
       }
     },
     tree_right_row1(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(3,1)
       }
@@ -314,7 +319,7 @@ export default {
       }
     },
     tree_right_row2(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(4,1)
       }
@@ -323,7 +328,7 @@ export default {
       }
     },
     tree_right_row3(val){
-      console.log(val)
+
       if(val===1){
         this.setRowActive(5,1)
       }

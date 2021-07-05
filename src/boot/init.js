@@ -12,6 +12,9 @@ export default async ({ app, router, Vue, store, ssrContext }) => {
   Vue.prototype.$cook = cookies
   if (token) {
    await store.dispatch('auth/getUser')
+     if (!process.env.SERVER) {
+       store.dispatch('auth/connectWS', store.state.auth.user.id)
+     }
   }
   Vue.prototype.$user = store.state.auth
   console.info('boot: init exited')

@@ -30,6 +30,42 @@
     <div class="container">
       <div class="page-wrapper">
         <div class="page-left">
+          <div class="flex items-center ">
+            <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
+            <h3 class="text-h5">Социальные сети</h3>
+          </div>
+
+          <q-card dark>
+            <q-list >
+
+              <a :href="item.url" target="_blank" v-for="item in socials" :key="item.id">
+                <q-item clickable v-ripple class="row">
+
+                  <q-item-section class="col-1 gt-sm" avatar>
+                    <q-avatar rounded>
+                      <img :src="item.logo">
+                    </q-avatar>
+                  </q-item-section>
+                  <q-item-section class="col-lg-4 col-md-6 col-sm-11 col-xs-11 ">{{item.name}}</q-item-section>
+                  <q-item-section class="gt-sm col-lg-4 col-md-6 col-sm-11 col-xs-11" >{{item.description}}</q-item-section>
+                  <q-item-section class="text-center gt-sm">{{item.type}}</q-item-section>
+                  <q-item-section side class="text-right">
+                    <q-btn color="primary" round dense flat icon="info">
+
+                      <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
+                        <strong>Tooltip</strong> on <em>bottom</em>
+                        (<q-icon name="keyboard_arrow_down"/>)
+                      </q-tooltip>
+                    </q-btn>
+                  </q-item-section>
+
+
+
+                </q-item>
+              </a>
+            </q-list>
+          </q-card>
+
           <div class="flex items-center no-wrap">
             <q-icon size="30px" class="q-mr-md" color="primary" name="campaign" />
             <h3 class="text-h5">Последние новости New World</h3>
@@ -42,31 +78,34 @@
           />
         </div>
         <div class="page-right">
-          <div class="flex items-center">
-            <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
-            <h3 class="text-h5">Новые компании</h3>
-          </div>
+          <router-link to="/companies">
+            <div class="flex items-center ">
+              <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
+              <h3 class="text-h5">Популярные компании</h3>
+            </div>
+          </router-link>
 
-         <CompanyCard
+          <CompanyCard
             v-for="guild in guilds"
             :key="guild.id"
             :item="guild"
-           />
+          />
 
           <div class="text-center">
             <q-btn v-if="!$user.loggedIn" @click="changeauthModalVisible(true)" icon="add" no-caps color="primary" text-color="dark" label="Добавить компанию"/>
             <q-btn v-else @click="changeguildCreateModalVisible(true)" icon="add" no-caps color="primary" text-color="dark" label="Добавить компанию"/>
           </div>
-            <q-separator spaced="lg"/>
+          <q-separator spaced="lg"/>
+
           <div class="flex items-center">
             <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
             <h3 class="text-h5">Новые билды</h3>
           </div>
-         <BuildCard
-           v-for="build in builds"
+          <BuildCard
+            v-for="build in builds"
             :key="build.name_slug"
             :item="build"
-         />
+          />
           <div class="text-center">
 
             <q-btn to="/skills" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
@@ -115,6 +154,7 @@ export default {
       autoplay:true,
       posts:[],
       guilds:[],
+      socials:[],
       ratingModel:4,
       banners:[],
       builds:[],
@@ -131,6 +171,8 @@ export default {
     this.banners = response_banners.data
     const response_builds = await this.$api.get(`/api/skill/build?for=index`)
     this.builds = response_builds.data
+    const response_social = await this.$api.get(`/api/social`)
+    this.socials = response_social.data
 
 
   },

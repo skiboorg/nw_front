@@ -25,6 +25,15 @@ const routes = [
       { path: 'companies/:slug', component: () => import('pages/guild_item.vue') },
     ]
   },
+  {
+    path: '/dkp',
+    component: () => import('layouts/dkpLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/dkp/index.vue'),meta: { requiresAuth: true }, },
+      { path: 'admin', component: () => import('pages/dkp/admin.vue') },
+
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

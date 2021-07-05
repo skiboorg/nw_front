@@ -14,7 +14,7 @@ Vue.use(VueRouter)
  * with the Router instance.
  */
 
-export default function (/* { store, ssrContext } */) {
+export default function ({ store, ssrContext }) {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes,
@@ -25,6 +25,24 @@ export default function (/* { store, ssrContext } */) {
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
   })
+
+  // Router.beforeEach((to, from, next) => {
+  //   // See if any of the matched routes has meta "requiresAuth"
+  //   if (to.matched.some(route => route.meta.requiresAuth)) {
+  //     // Yes this route requires authentication. See if the user is authenticated.
+  //     console.log(store.getters['auth/isLoggedIn'])
+  //     if (store.getters['auth/isLoggedIn']) {
+  //       // User is authenticated, we allow access.
+  //       next();
+  //     } else {
+  //       // User is not authenticated. We can redirect her to
+  //       // our login page. Or wherever we want.
+  //       next("/");
+  //     }
+  //   } else {
+  //     next();
+  //   }
+  // });
 
   return Router
 }

@@ -12,13 +12,15 @@
         />
 
         <q-card-section class="flex column">
+          <h3 class="text-h6">{{post.name}}</h3>
           <p>
             {{post.short_description}}
           </p>
 
           <q-space/>
           <q-separator color="primary" spaced="lg"/>
-          <div class="text-right">
+          <div class="flex justify-between items-center">
+            <p class="no-margin">{{new Date(post.created_at).toLocaleDateString() }}</p>
             <q-btn :to="`/news/${post.name_slug}`" color="primary"  text-color="dark" no-caps label="Подробнее"/>
           </div>
 

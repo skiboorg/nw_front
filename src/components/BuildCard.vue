@@ -10,7 +10,7 @@
 
                 <div class="">
 
-                <p class="q-mb-none text-caption">{{item.weapon1.name}}</p>
+                <p class="q-mb-none text-caption text-primary">{{item.weapon1.name}}</p>
                 </div>
 
               </div>
@@ -21,12 +21,12 @@
 
                 <div class="">
 
-                <p class="q-mb-none text-caption">{{item.weapon2.name}}</p>
+                <p class="q-mb-none text-caption text-primary">{{item.weapon2.name}}</p>
                 </div>
 
               </div>
               </div>
-              <p class="text-h6 no-margin text-center">{{item.name}}</p>
+              <p class="text-h6 no-margin text-center ">{{item.name}}</p>
               <q-separator v-if="item.description" spaced="md"/>
               <p v-if="item.description" class="no-margin">{{item.description}}</p>
             </q-card-section>

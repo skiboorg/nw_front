@@ -380,9 +380,9 @@
             <!--      <q-toggle v-model="accept" label="I accept the license and terms" />-->
 
             <div>
-              <div class="text-center">
+              <div class="text-center flex items-center justify-between">
                 <q-btn label="Добавить" :loading="is_loading" text-color="dark" no-caps type="submit" class="q-px-xl q-mb-md" color="primary "/>
-
+                <p class="no-margin text-center text-bold">Для редактирования иформации в будущем обращайтесь в дискорд <span class="text-negative">greshnik#9579</span></p>
               </div>
 
 
@@ -469,6 +469,8 @@ export default {
           email: this.userData.email,
           password: this.userData.password2,
           nickname: this.userData.nickname,
+          discord: null,
+          is_guild_member: false
         })
         this.$q.notify({
           message: 'Аккаунт создан',

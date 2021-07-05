@@ -4,7 +4,7 @@
        <q-card-section class="text-center">
             <div class="flex items-center " :class="[item.image ? 'justify-between' : 'justify-center']">
               <q-avatar square v-if="item.image" size="100px">
-                <img :src="item.image" alt="">
+                <img style="object-fit: contain" :src="item.image" alt="">
               </q-avatar>
               <router-link style="text-decoration: none;" :to="`/companies/${item.name_slug}`">
                 <p class="text-center text-h6 text-primary q-mb-none">{{item.name}}</p>
@@ -23,6 +23,7 @@
                 <p class="q-mb-none"><span class="text-primary">Фракция </span> {{item.fraction}}</p>
                 <p class="q-mb-none"><span class="text-primary">Сервер </span> {{item.server}}</p>
                 <p class="q-mb-none"><span class="text-primary">Направленность </span> {{item.style}}</p>
+                <p class="q-mb-none"><span class="text-primary">Отзывов </span> {{item.feedbacks.length>0 ? item.feedbacks.length : 'Нет'}}</p>
               </q-card-section>
             </q-card-section>
      </router-link>

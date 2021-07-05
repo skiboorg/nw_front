@@ -9,7 +9,7 @@
 
       <div class="container">
         <div v-if="guild.image" class="text-center q-mb-lg">
-          <q-img :ratio="16/9" :src="guild.image" alt=""/>
+          <img style="max-width: 100%;height: auto;object-fit: contain" :src="guild.image" alt="">
         </div>
         <div class="post-content" v-html="guild.description"></div>
         <q-separator spaced="lg"/>

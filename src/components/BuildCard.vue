@@ -10,7 +10,7 @@
 
                 <div class="">
 
-                <p class="q-mb-none text-caption text-primary">{{item.weapon1.name}}</p>
+                <p class="q-mb-none text-body2 text-primary">{{item.weapon1.name}}</p>
                 </div>
 
               </div>
@@ -21,14 +21,16 @@
 
                 <div class="">
 
-                <p class="q-mb-none text-caption text-primary">{{item.weapon2.name}}</p>
+                <p class="q-mb-none text-body2 text-primary">{{item.weapon2.name}}</p>
                 </div>
 
               </div>
               </div>
               <p class="text-h6 no-margin text-center ">{{item.name}}</p>
               <q-separator v-if="item.description" spaced="md"/>
-              <p v-if="item.description" class="no-margin">{{item.description}}</p>
+              <q-scroll-area style="height: 100px;">
+              <p v-if="item.description" class="no-margin" v-html="item.description"></p>
+              </q-scroll-area>
             </q-card-section>
    </router-link>
           </q-card>

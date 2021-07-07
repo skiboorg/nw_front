@@ -7,7 +7,7 @@
           <q-toolbar-title >
             <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap" to="/">
               <p class="q-mb-none q-mr-xs">NW</p>
-              <img class="logo  q-mr-xs" src="~assets/new-world-1.png" alt="">
+              <img class="logo  q-mr-xs" src="~assets/logo.png" alt="">
               <p class="q-mb-none">FANS</p>
             </router-link>
           </q-toolbar-title>
@@ -29,16 +29,6 @@
                     <router-link class="nav-link" to="/faq">FAQ</router-link>
                   </q-item-section>
                 </q-item>
-              </q-list>
-            </q-btn-dropdown>
-
-             <q-btn-dropdown  auto-close stretch flat label="Калькулятор">
-              <q-list class="bg-grey-9">
-                <q-item clickable>
-                  <q-item-section >
-                    <router-link  class="nav-link" to="/skills">Калькулятор (v0.2)</router-link>
-                  </q-item-section>
-                </q-item>
                 <q-separator/>
                 <q-item clickable>
                   <q-item-section>
@@ -47,9 +37,11 @@
                 </q-item>
               </q-list>
             </q-btn-dropdown>
-            <q-route-tab name="map" label="Карта" to="/map"/>
-            <q-route-tab name="trade" label="Биржа" to="/trade"/>
+            <q-route-tab name="calc" label="Калькулятор (v0.3)" to="/skills"/>
 
+            <q-route-tab name="map" label="Карта" to="/map"/>
+<!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
+          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
 
           </q-tabs>
           <q-btn
@@ -90,37 +82,37 @@
       <q-list  dark >
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/news')">
-           Новости
+            Новости
           </q-item-section>
         </q-item>
-         <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/companies')">
-           Компании
+            Компании
           </q-item-section>
         </q-item>
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/guides')">
-           Гайды
+            Гайды
           </q-item-section>
         </q-item>
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/faq')">
-           FAQ
+            FAQ
           </q-item-section>
         </q-item>
-         <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/skills')">
-           Калькулятор
+            Калькулятор
           </q-item-section>
         </q-item>
-          <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/map')">
-           Карта
+            Карта
           </q-item-section>
         </q-item>
-             <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/trade')">
-           Биржа
+            Биржа
           </q-item-section>
         </q-item>
         <q-separator/>
@@ -139,7 +131,7 @@
           <div class="flex items-center">
             <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap q-mr-md" to="/">
               <p class="q-mb-none q-mr-xs">NW</p>
-              <img class="logo  q-mr-xs" src="~assets/new-world-1.png" alt="">
+              <img class="logo  q-mr-xs" src="~assets/logo.png" alt="">
               <p class="q-mb-none">FANS</p>
             </router-link>
             <p class="q-mb-none">Информационный сайт посвященный игре New World</p>
@@ -266,7 +258,7 @@
         </q-card-section>
       </q-card>
     </q-dialog>
-     <q-dialog v-model="is_guildCreateModal_visible">
+    <q-dialog v-model="is_guildCreateModal_visible">
       <q-card style="width: 700px; max-width: 80vw;">
         <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">Добавление компании</div>
@@ -290,21 +282,21 @@
               :rules="[ val => val && val.length > 0 || 'Введите название'
               ]"/>
 
-             <q-select class="form-control" :dense="!$q.screen.gt.md" filled v-model="guildData.fraction" :options="fraction_options" label="Фракция" />
-             <q-select class="form-control" :dense="!$q.screen.gt.md" filled v-model="guildData.size" :options="size_options" label="Размер" />
-             <q-select class="form-control q-mb-md" :dense="!$q.screen.gt.md" filled v-model="guildData.style" :options="style_options" label="Направленность" />
-             <q-input class="form-control q-mb-md" filled v-model="guildData.server" label="Сервер" />
-             <q-input class="form-control q-mb-md" filled v-model="guildData.discord_link" label="Ссылка на Discord" />
+            <q-select class="form-control" :dense="!$q.screen.gt.md" filled v-model="guildData.fraction" :options="fraction_options" label="Фракция" />
+            <q-select class="form-control" :dense="!$q.screen.gt.md" filled v-model="guildData.size" :options="size_options" label="Размер" />
+            <q-select class="form-control q-mb-md" :dense="!$q.screen.gt.md" filled v-model="guildData.style" :options="style_options" label="Направленность" />
+            <q-input class="form-control q-mb-md" filled v-model="guildData.server" label="Сервер" />
+            <q-input class="form-control q-mb-md" filled v-model="guildData.discord_link" label="Ссылка на Discord" />
             <q-file class="form-control" :dense="!$q.screen.gt.md" filled v-model="guildData.image" label="Аватар, баннер и т.д." />
 
             <p class="text-h6 q-mt-md full-width">Описание компании</p>
             <div style="overflow-y: auto">
               <q-editor
-      v-model="guildData.description"
+                v-model="guildData.description"
 
-      :dense="$q.screen.lt.md"
-      class="q-mb-md"
-      :toolbar="[
+                :dense="$q.screen.lt.md"
+                class="q-mb-md"
+                :toolbar="[
 
         ['bold', 'italic', 'strike','hr', 'underline', 'subscript', 'superscript'],
 
@@ -364,7 +356,7 @@
 
 
       ]"
-      :fonts="{
+                :fonts="{
         arial: 'Arial',
         arial_black: 'Arial Black',
         comic_sans: 'Comic Sans MS',
@@ -374,7 +366,7 @@
         times_new_roman: 'Times New Roman',
         verdana: 'Verdana'
       }"
-    />
+              />
             </div>
 
             <!--      <q-toggle v-model="accept" label="I accept the license and terms" />-->
@@ -388,6 +380,32 @@
 
             </div>
           </q-form>
+
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="feedbackModal"  >
+      <q-card  style="width: 700px; max-width: 80vw;">
+
+        <q-card-section >
+          <p class="text-dark text-center text-h6 text-bold q-mb-none">Обратная связь</p>
+          <p class="text-caption text-center">Все ваши предложения по улучшению работы сайта и замечания будут рассмотрены</p>
+          <q-input
+            filled
+            :dense="!$q.screen.gt.md"
+            class="q-mb-md"
+            v-model="fb_user"
+            label="Ваш e-mail, discord (username#0000) или любой способ связи *"/>
+          <q-input
+            v-model="fb_text"
+            filled
+            class="q-mb-md"
+            label="Сообщение *"
+            type="textarea"
+          />
+          <div class="text-center ">
+            <q-btn @click="add_fb" :loading="is_loading" color="primary" :disable="!fb_text || !fb_user" text-color="dark" label="Отправить"/>
+          </div>
 
         </q-card-section>
       </q-card>
@@ -408,8 +426,11 @@ export default {
       tab:'index',
       leftDrawerOpen:false,
       is_loading:false,
+      feedbackModal:false,
       name: null,
       age: null,
+      fb_text: null,
+      fb_user: null,
       accept: false,
       is_register:false,
       email_re:/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -459,6 +480,22 @@ export default {
       this.loginUser(this.userLogin)
 
     },
+    async add_fb(){
+      this.is_loading = true
+
+      await this.$api.post('/api/add_fb', {
+          fb_user: this.fb_user,
+          fb_text: this.fb_text
+        })
+      this.$q.notify({
+          message: 'Спасибо! :))',
+          position: this.$q.screen.lt.sm ? 'bottom' : 'bottom-right',
+          color: 'positive',
+          icon: 'announcement'
+        })
+      this.is_loading = false
+      this.feedbackModal = false
+    },
     onSubmit () {
       console.log('submit')
       this.completeRegistration()
@@ -505,21 +542,21 @@ export default {
         data: formData
       })
       this.$q.notify({
-          message: 'Спасибо, компания поставлена на модерацию',
-          position: this.$q.screen.lt.sm ? 'bottom' : 'bottom-right',
-          color: 'positive',
-          icon: 'announcement'
-        })
+        message: 'Спасибо, компания поставлена на модерацию',
+        position: this.$q.screen.lt.sm ? 'bottom' : 'bottom-right',
+        color: 'positive',
+        icon: 'announcement'
+      })
       this.is_loading = false
       this.changeguildCreateModalVisible(false)
       this.guildData.name=null
-        this.guildData.fraction='Не выбрана еще'
-        this.guildData.server=null
-        this.guildData.size='1-10'
-        this.guildData.style='ПвЕ'
-        this.guildData.image=null
-        this.guildData.description=null
-        this.guildData.discord_link=null
+      this.guildData.fraction='Не выбрана еще'
+      this.guildData.server=null
+      this.guildData.size='1-10'
+      this.guildData.style='ПвЕ'
+      this.guildData.image=null
+      this.guildData.description=null
+      this.guildData.discord_link=null
 
 
     },

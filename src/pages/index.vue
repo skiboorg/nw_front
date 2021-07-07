@@ -81,7 +81,8 @@
           <router-link to="/companies">
             <div class="flex items-center ">
               <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
-              <h3 class="text-h5">Популярные компании</h3>
+              <h3 class="text-h5 text-title">Популярные компании</h3>
+
             </div>
           </router-link>
 
@@ -96,11 +97,14 @@
             <q-btn v-else @click="changeguildCreateModalVisible(true)" icon="add" no-caps color="primary" text-color="dark" label="Добавить компанию"/>
           </div>
           <q-separator spaced="lg"/>
-
+          <router-link to="/builds">
           <div class="flex items-center">
+
             <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
-            <h3 class="text-h5">Новые билды</h3>
+            <h3 class="text-h5 text-title">Новые билды</h3>
           </div>
+          </router-link>
+
           <BuildCard
             v-for="build in builds"
             :key="build.name_slug"

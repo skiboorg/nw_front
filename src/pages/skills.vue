@@ -3,6 +3,7 @@
 
   <q-page class="">
     <div class="container">
+      <p class="text-body2 text-center q-mb-none q-mt-md">Для сохранения билда выберите оба оружия и распределите все доступные очки</p>
 
      <Calculator weapon_title="Выберите первый набор" :weapon_num="1" @done="firstDone" @changeFirstWeapon="changeFirstWeapon"/>
     <Calculator weapon_title="Выберите второй набор" :weapon_num="2" @done="secondDone" @changeSecondWeapon="changeSecondWeapon"/>
@@ -13,7 +14,84 @@
             <div v-if="!is_build_saved">
               <p class="text-h6">Сохранить билд</p>
               <q-input v-model="build_name" class="q-mb-md" filled label="Название" dark/>
-              <q-input v-model="build_description" class="q-mb-md" filled label="Описание билда" dark type="textarea"/>
+                  <q-editor
+      v-model="build_description"
+        label="Описание билда"
+      dark
+      :dense="$q.screen.lt.md"
+      class="q-mb-md"
+      :toolbar="[
+
+        ['bold', 'italic', 'strike','hr', 'underline', 'subscript', 'superscript'],
+
+
+        [
+          {
+            label: $q.lang.editor.formatting,
+            icon: $q.iconSet.editor.formatting,
+            list: 'no-icons',
+            options: [
+              'p',
+              'h1',
+              'h2',
+              'h3',
+              'h4',
+              'h5',
+              'h6',
+              'code'
+            ]
+          },
+          {
+            label: $q.lang.editor.fontSize,
+            icon: $q.iconSet.editor.fontSize,
+            fixedLabel: true,
+            fixedIcon: true,
+            list: 'no-icons',
+            options: [
+              'size-1',
+              'size-2',
+              'size-3',
+              'size-4',
+              'size-5',
+              'size-6',
+              'size-7'
+            ]
+          },
+          {
+            label: $q.lang.editor.defaultFont,
+            icon: $q.iconSet.editor.font,
+            fixedIcon: true,
+            list: 'no-icons',
+            options: [
+              'default_font',
+              'arial',
+              'arial_black',
+              'comic_sans',
+              'courier_new',
+              'impact',
+              'lucida_grande',
+              'times_new_roman',
+              'verdana'
+            ]
+          },
+          'removeFormat'
+        ],
+        ['quote', 'unordered', 'ordered', 'outdent', 'indent'],
+
+
+      ]"
+      :fonts="{
+        arial: 'Arial',
+        arial_black: 'Arial Black',
+        comic_sans: 'Comic Sans MS',
+        courier_new: 'Courier New',
+        impact: 'Impact',
+        lucida_grande: 'Lucida Grande',
+        times_new_roman: 'Times New Roman',
+        verdana: 'Verdana'
+      }"
+    />
+
               <q-btn @click="saveBuild" :disable="!build_description || !build_name" :loading="is_loading" color="primary" text-color="dark" no-caps label="Сохранить"/>
             </div>
             <div v-else class="">
@@ -123,7 +201,7 @@ export default {
       this.is_build_saved = true
       this.build_slug = response.data.slug
        this.$q.notify({
-          message: 'Спасибо, ссылка будет активна после модерации',
+          message: 'Спасибо, ссылка активна и ей можно делиться с друзьями',
           position: this.$q.screen.lt.sm ? 'bottom' : 'bottom-right',
           color: 'positive',
           icon: 'announcement'
@@ -162,6 +240,7 @@ export default {
 
   computed:{
     showForm(){
+
       return this.firstWeaponDone && this.secondWeaponDone
     }
   }

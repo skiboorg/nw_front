@@ -51,8 +51,8 @@ a
     top: 50%
     transform: translateX(-50%) translateY(-50%)
     font-size: 185px
-    opacity: .02
-    color: #ffffff
+    opacity: .07
+    color: $primary
     text-align: center
 
   display: grid
@@ -68,7 +68,7 @@ a
     &:last-child
       margin-top: 20px
     &.row-is-active
-      background: #262626
+      background: #313131
 
   &__item
     position: relative
@@ -87,6 +87,8 @@ a
       width: 50px
       height: 50px
       object-fit: contain
+      user-select: none
+
     &.active-skill
       border: 1px solid white
       border-radius: unset
@@ -124,7 +126,7 @@ a
       pointer-events: all !important
 
     &.item-disabled
-      pointer-events: none
+
       background: red
     &.skill-is-ultimate
       border-radius: 100%
@@ -150,9 +152,9 @@ a
         z-index: 0
 
 .save-build
-  max-width: 600px
+  max-width: 900px
   margin: 0 auto
-  text-align: center
+
 
 @media (max-width: 850px)
   .skill-tree
@@ -173,6 +175,9 @@ a
   .skills-wrapper
     grid-template-columns: 1fr
 
+.bg-unset
+  background: unset
+
 @media (max-width: 640px)
   .weapon-grid
     grid-template-columns: 1fr
@@ -183,3 +188,10 @@ a
   display: grid
   grid-template-columns: repeat(auto-fill,minmax(300px,1fr))
   grid-gap: 20px
+
+.text-title
+  transition: all .2s linear
+  border-bottom: 1px solid transparent
+  &:hover
+    color: $primary
+    border-bottom: 1px solid $primary

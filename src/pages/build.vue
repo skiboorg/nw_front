@@ -14,9 +14,13 @@
 
 
 
+    <q-card dark>
+      <q-card-section>
+         <p class="text-h6">Описание билда</p>
+    <p v-html="build.description"></p>
+      </q-card-section>
+    </q-card>
 
-     <p class="text-h6">Описание</p>
-    <p>{{build.description}}</p>
     </div>
 <!--    <div v-else class="container">-->
 <!--      <q-inner-loading dark :showing="true">-->

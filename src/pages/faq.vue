@@ -11,9 +11,10 @@
         v-for="faq in faqs"
         :key="faq.id"
         :label="faq.question"
+        class="text-h6 text-primary"
       >
         <q-card class="bg-grey-9">
-          <q-card-section v-html="faq.answer">
+          <q-card-section class="text-white" v-html="faq.answer">
 
           </q-card-section>
         </q-card>

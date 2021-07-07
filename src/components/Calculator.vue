@@ -6,23 +6,34 @@
           <div class="text-h6 q-mb-md">{{weapon_title}}</div>
 
           <div class="weapon-grid">
-            <q-card v-if="!item.is_selected" @click="selectWeapon(index)" v-for="(item,index) in weapons" :key="item.id" class="cursor-pointer shadow-4">
+            <q-card  flat v-if="!item.is_selected" @click="selectWeapon(index)" v-for="(item,index) in weapons" :key="item.id" class="weapon-card cursor-pointer bg-grey-5 ">
               <q-img :src="item.image" :ratio="16/9">
                 <div class="text-h5 absolute-bottom text-right no-padding">
                   <p class="q-mb-none q-mr-sm">{{item.name}}</p>
                   <p class="text-caption q-mb-none q-mr-sm">Характеристики: {{item.main_char}}</p>
                 </div>
               </q-img>
+
             </q-card>
           </div>
         </q-tab-panel>
 
         <q-tab-panel name="calc">
-          <div @click="closeCalc" class="flex items-center q-mb-md cursor-pointer">
-            <q-icon size="30px" name="west" class="q-mr-lg"/>
-            <p class="q-mb-none text-h6">Выбрать другое оружие</p>
+          <div  class="flex items-center justify-between">
+            <div @click="closeCalc" class="flex items-center q-mb-md cursor-pointer">
+              <q-icon size="30px" name="west" color="primary" class="q-mr-lg"/>
+            <p class="q-mb-none text-h6 text-primary ">Выбрать другое оружие</p>
+            </div>
+
+
+            <q-btn @click="reset" color="primary" text-color="dark" label="Сброс вложенных очков"/>
           </div>
-          <div :data-name="weapon.name" class="skills-wrapper q-mb-lg">
+          <div class="text-center">
+             <p class="q-mb-none text-h5 text-bold">{{weapon.name}}</p>
+          <p class="q-mb-none text-body2" v-html="weapon.description"></p>
+          </div>
+
+          <div  class="skills-wrapper q-mb-lg">
 
             <div  class="skill-tree" v-for="(tree,tree_index) in weapon.trees" :key="tree.id">
 
@@ -36,7 +47,7 @@
               <div :ref="`row${row_index+1}tree${tree_index}`" class="skill-tree__row " v-for="(row,row_index) in 6">
                 <div v-if="!item.is_empty"
                      @mouseenter="is_hover=true"
-                     @click="item.is_can_check ? checkItem(tree_index,item.id) : null"
+                     @click="avaiable_points > 0   && item.is_can_check || item.is_checked ? checkItem(tree_index,item.id) : null"
                      class="skill-tree__item"
                      :class="[
                      item.is_active_skill ? 'active-skill':'',
@@ -50,7 +61,7 @@
                      ]"
                      v-for="(item,item_index) in _.orderBy(tree.skills.filter(x=>x.row===row_index+1), ['col'],['asc'])"
                      :key="item_index">
-                  <img :src="item.image"/>
+                  <img draggable="false" :src="item.image"/>
 
                   <q-tooltip
                     transition-show="scale"
@@ -149,6 +160,19 @@ export default {
         this.tree_right_rows[x].points=0
       }
     },
+    reset(){
+      this.total_points = 19
+      for (let i of this.weapon.trees[0].skills){
+          i.is_checked = false
+      }
+      for (let i of this.weapon.trees[1].skills){
+          i.is_checked = false
+      }
+      for (let x in this.tree_left_rows){
+        this.tree_left_rows[x].points=0
+        this.tree_right_rows[x].points=0
+      }
+    },
 
     async getWeapon(slug){
       const response = await this.$api.get(`/api/skill/weapon?slug=${slug}`)
@@ -170,6 +194,8 @@ export default {
       }
     },
     setRowInActive(row_index,tree_index){
+     console.log('row_index',row_index)
+     // console.log('tree_index',tree_index)
       this.$refs[`row${row_index}tree${tree_index}`][0].classList.remove('row-is-active')
       for (let i of this.weapon.trees[tree_index].skills){
         if (i.row===row_index){
@@ -181,7 +207,7 @@ export default {
       // for (let x in this.tree_left_rows){
       //   this.tree_left_rows[x].points=0
       // }
-      if (row_index===0){
+      if (tree_index===0){
         this.tree_left_rows[row_index-1].points=0
       }else{
         this.tree_right_rows[row_index-1].points=0
@@ -217,7 +243,6 @@ export default {
           current_value ? this.tree_right_rows[skill_item.row-1].points -=1 : this.tree_right_rows[skill_item.row-1].points +=1
           this.weapon.trees[1].checked_skills[`skill_id_${skill_item.id}`] = skill_item.is_checked
           // this.weapon.trees[1].checked_skills.push(skill_item.id)
-
         }
       }else{
         let parent = this.weapon.trees[tree_index].skills.find(x=>x.id===parent_item)
@@ -252,27 +277,33 @@ export default {
 
 },
     tree_left_row0(val){
+      console.log('tree_left_row0',val)
 
       if(val===1){
         this.setRowActive(2,0)
       }
       if(val===0){
+        console.log('setRowInActive(2,0)',)
         this.setRowInActive(2,0)
+
+
+
 
       }
     },
     tree_left_row1(val){
-
+      console.log('tree_left_row1',val)
       if(val===1){
         this.setRowActive(3,0)
       }
       if(val===0){
+        console.log('setRowInActive(3,0)',)
         this.setRowInActive(3,0)
 
       }
     },
     tree_left_row2(val){
-
+      console.log('tree_left_row2',val)
       if(val===1){
         this.setRowActive(4,0)
       }
@@ -282,7 +313,7 @@ export default {
       }
     },
     tree_left_row3(val){
-
+      console.log('tree_left_row3',val)
       if(val===1){
         this.setRowActive(5,0)
       }
@@ -301,25 +332,27 @@ export default {
     },
     //-----
     tree_right_row0(val){
-
+      console.log('tree_right_row0',val)
       if(val===1){
         this.setRowActive(2,1)
       }
       if(val===0){
+        console.log('R setRowInActive(2,0)',)
         this.setRowInActive(2,1)
       }
     },
     tree_right_row1(val){
-
+       console.log('tree_right_row1',val)
       if(val===1){
         this.setRowActive(3,1)
       }
       if(val===0){
+        console.log('R setRowInActive(3,0)',)
         this.setRowInActive(3,1)
       }
     },
     tree_right_row2(val){
-
+       console.log('tree_right_row2',val)
       if(val===1){
         this.setRowActive(4,1)
       }
@@ -328,7 +361,7 @@ export default {
       }
     },
     tree_right_row3(val){
-
+       console.log('tree_right_row3',val)
       if(val===1){
         this.setRowActive(5,1)
       }
@@ -401,11 +434,12 @@ export default {
     avaiable_points(){
       return this.total_points - (this.points_spent_left + this.points_spent_right )
     }
-
-
-
-
   }
 
 };
 </script>
+<style lang="sass">
+.weapon-card
+  &:hover
+    box-shadow: 0 0px 30px 0px #ffb10f78 !important
+</style>

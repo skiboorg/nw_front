@@ -21,6 +21,7 @@ module.exports = function (/* ctx */) {
     boot: [
 
       'axios',
+      'scroll',
       'init',
       {
         server: false, // run on client-side only!

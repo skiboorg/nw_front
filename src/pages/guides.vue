@@ -7,9 +7,9 @@
             <h1 class="text-h5">Гайды New World</h1>
           </div>
     <div class="q-gutter-md">
-      <q-btn color="primary" text-color="white" :label="category.name" v-for="category in categories" :key="category.id"/>
+      <q-btn color="primary" @click="$scrollTo(`#cat_${category.id}`, 200, {offset: -90})" text-color="white" :label="category.name" v-for="category in categories" :key="category.id"/>
     </div>
-    <div class="" v-for="category in categories" :key="category.id">
+    <div :id="`cat_${category.id}`" class="" v-for="category in categories" :key="category.id">
       <h3 class="text-h5 text-primary text-bold">{{category.name}}</h3>
       <q-separator spaced="lg"/>
        <div class="companies-grid">
@@ -23,6 +23,7 @@
 
 
         </div>
+
 </q-page>
 </template>
 

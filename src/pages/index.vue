@@ -46,18 +46,10 @@
                       <img :src="item.logo">
                     </q-avatar>
                   </q-item-section>
-                  <q-item-section class="col-lg-4 col-md-6 col-sm-11 col-xs-11 ">{{item.name}}</q-item-section>
-                  <q-item-section class="gt-sm col-lg-4 col-md-6 col-sm-11 col-xs-11" >{{item.description}}</q-item-section>
+                  <q-item-section class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">{{item.name}}</q-item-section>
+                  <q-item-section class="col-lg-4 col-md-6 col-sm-6 col-xs-6" >{{item.description}}</q-item-section>
                   <q-item-section class="text-center gt-sm">{{item.type}}</q-item-section>
-                  <q-item-section side class="text-right">
-                    <q-btn color="primary" round dense flat icon="info">
 
-                      <q-tooltip anchor="bottom middle" self="top middle" :offset="[10, 10]">
-                        <strong>Tooltip</strong> on <em>bottom</em>
-                        (<q-icon name="keyboard_arrow_down"/>)
-                      </q-tooltip>
-                    </q-btn>
-                  </q-item-section>
 
 
 

@@ -7,7 +7,7 @@
       <q-card-section horizontal>
         <q-img
           class="col-4"
-          :ratio="16/9"
+          :ratio="$q.screen.lt.md ? 4/3 : 16/9"
           :src="post.image"
         />
 

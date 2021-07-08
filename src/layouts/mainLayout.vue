@@ -123,6 +123,9 @@
     </q-drawer>
     <q-page-container>
       <router-view />
+      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+            <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
+          </q-page-scroller>
     </q-page-container>
     <footer class="q-pb-lg">
       <q-separator spaced="lg"/>

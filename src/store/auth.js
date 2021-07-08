@@ -99,12 +99,12 @@ const actions = {
     commit('updateUser', response.data)
     commit('updateUserStatus', true)
     this.dispatch('componentState/changeauthModalVisible',false)
-    if (!getters.ws_connected){
-       console.log('coneecting WS')
-      if (!process.env.SERVER) {
-        dispatch('connectWS', response.data.id)
-      }
-    }
+    // if (!getters.ws_connected){
+    //    console.log('coneecting WS')
+    //   if (!process.env.SERVER) {
+    //     dispatch('connectWS', response.data.id)
+    //   }
+    // }
 
   },
   logoutUser({commit}){

@@ -39,7 +39,7 @@
             </q-btn-dropdown>
             <q-route-tab name="calc" label="Калькулятор (v0.3)" to="/skills"/>
 
-            <q-route-tab name="map" label="Карта" to="/map"/>
+<!--            <q-route-tab name="map" label="Карта" to="/map"/>-->
 <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
           <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
 
@@ -105,14 +105,19 @@
             Калькулятор
           </q-item-section>
         </q-item>
-        <q-item clickable v-ripple >
-          <q-item-section @click="$router.push('/map')">
-            Карта
-          </q-item-section>
-        </q-item>
-        <q-item clickable v-ripple >
-          <q-item-section @click="$router.push('/trade')">
-            Биржа
+<!--        <q-item clickable v-ripple >-->
+<!--          <q-item-section @click="$router.push('/map')">-->
+<!--            Карта-->
+<!--          </q-item-section>-->
+<!--        </q-item>-->
+<!--        <q-item clickable v-ripple >-->
+<!--          <q-item-section @click="$router.push('/trade')">-->
+<!--            Биржа-->
+<!--          </q-item-section>-->
+<!--        </q-item>-->
+         <q-item clickable v-ripple >
+          <q-item-section @click="feedbackModal = !feedbackModal">
+            Обратная связь
           </q-item-section>
         </q-item>
         <q-separator/>

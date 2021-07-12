@@ -1,12 +1,12 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="bg-dark">
-     <q-header elevated  class="bg-dark q-py-md ">
+   <q-header elevated  class="bg-dark q-py-md ">
       <div class="container">
         <q-toolbar class="flex items-center">
           <q-toolbar-title >
             <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap" to="/">
               <p class="q-mb-none q-mr-xs">NW</p>
-              <img class="logo  q-mr-xs" src="~assets/new-world-1.png" alt="">
+              <img class="logo  q-mr-xs" src="~assets/logo.png" alt="">
               <p class="q-mb-none">FANS</p>
             </router-link>
           </q-toolbar-title>
@@ -28,15 +28,19 @@
                     <router-link class="nav-link" to="/faq">FAQ</router-link>
                   </q-item-section>
                 </q-item>
-
-
-
+                <q-separator/>
+                <q-item clickable>
+                  <q-item-section>
+                    <router-link class="nav-link" to="/builds">Билды</router-link>
+                  </q-item-section>
+                </q-item>
               </q-list>
             </q-btn-dropdown>
-            <q-route-tab name="calc" label="Калькулятор" to="/skills"/>
-            <q-route-tab name="map" label="Карта" to="/map"/>
-            <q-route-tab name="trade" label="Биржа" to="/trade"/>
+            <q-route-tab name="calc" label="Калькулятор (v0.3)" to="/skills"/>
 
+            <q-route-tab name="map" label="Карта" to="/map"/>
+<!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
+          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
 
           </q-tabs>
           <q-btn
@@ -77,37 +81,42 @@
       <q-list  dark >
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/news')">
-           Новости
+            Новости
           </q-item-section>
         </q-item>
-         <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/companies')">
-           Компании
+            Компании
           </q-item-section>
         </q-item>
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/guides')">
-           Гайды
+            Гайды
           </q-item-section>
         </q-item>
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/faq')">
-           FAQ
+            FAQ
           </q-item-section>
         </q-item>
-         <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/skills')">
-           Калькулятор
+            Калькулятор
           </q-item-section>
         </q-item>
-          <q-item clickable v-ripple >
+        <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/map')">
-           Карта
+            Карта
           </q-item-section>
         </q-item>
-             <q-item clickable v-ripple >
-          <q-item-section @click="$router.push('/trade')">
-           Биржа
+<!--        <q-item clickable v-ripple >-->
+<!--          <q-item-section @click="$router.push('/trade')">-->
+<!--            Биржа-->
+<!--          </q-item-section>-->
+<!--        </q-item>-->
+         <q-item clickable v-ripple >
+          <q-item-section @click="feedbackModal = !feedbackModal">
+            Обратная связь
           </q-item-section>
         </q-item>
         <q-separator/>
@@ -130,20 +139,20 @@ export default {
   name: 'MainLayout',
    meta: {
     // sets document title
-    title: 'Карта объектов New World',
+    title: 'Интерактивная карта, карта объектов New World',
 
 
     // meta tags
     meta: {
-      description: {name: 'description', content: 'Page 1'},
-      keywords: {name: 'keywords', content: 'Quasar website'},
+      description: {name: 'description', content: 'Интерактивная карта, карта объектов New World, точки интереса и ресурсы'},
+      keywords: {name: 'keywords', content: 'Интерактивная карта, карта объектов New World, точки интереса, точки интереса, сундуки'},
       equiv: {'http-equiv': 'Content-Type', content: 'text/html; charset=UTF-8'},
       // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
       ogTitle: {
         name: 'og:title',
         // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `${ogTitle} - My Website`
+          return `Интерактивная карта New World`
         }
       }
     }

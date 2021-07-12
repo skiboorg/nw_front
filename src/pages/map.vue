@@ -54,6 +54,7 @@
 
       <q-no-ssr>
         <l-map
+          @click="addMarker"
           ref="map"
           :bounds="bounds"
           :zoom="10"
@@ -148,7 +149,7 @@ export default {
   data() {
     return {
       tab:'map',
-      leftDrawerOpen: false,
+      leftDrawerOpen: true,
       is_poi_visible:true,
       iconSize: [54, 54],
       iconAnchor: [16, 37],
@@ -170,7 +171,7 @@ export default {
       categoryTypes:[
 
       ],
-      url: "https://newworldfans.com/tiles/{z}/map_y{y}_x{x}.jpg",
+      url: `${process.env.API}/media/map/{z}/map_y{y}_x{x}.jpg`,
 
       zoom:{ position: "center" },
       minZoom:1,
@@ -203,6 +204,9 @@ export default {
 
   },
   methods:{
+    addMarker(event){
+      console.log('add',event.latlng)
+    },
     typeChange(index){
       if(!this.categoryTypes[index].is_visible){
         for (let  x of this.categoryTypes[index].category){

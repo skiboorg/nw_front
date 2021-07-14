@@ -2,9 +2,10 @@
  <q-card dark class="bg-grey-10 cursor-pointer q-mb-md">
    <router-link  :to="`/builds/${item.name_slug}`">
             <q-card-section>
+
               <div class="flex items-center justify-between">
-                 <div class="flex items-center ">
-                <q-avatar square size="150" class="q-mr-md">
+                 <div class="flex items-center justify-evenly">
+                <q-avatar square size="50px" class="q-mr-md">
                   <img style="object-fit: contain" :src="img_url+item.weapon1.image">
                 </q-avatar>
 
@@ -14,8 +15,8 @@
                 </div>
 
               </div>
-              <div class="flex items-center ">
-                <q-avatar square size="150" class="q-mr-md">
+              <div class="flex items-center justify-evenly">
+                <q-avatar square size="50px" class="q-mr-md">
                   <img style="object-fit: contain" :src="img_url+item.weapon2.image">
                 </q-avatar>
 
@@ -26,10 +27,12 @@
 
               </div>
               </div>
-              <p class="text-h6 no-margin text-center ">{{item.name}}</p>
-              <q-separator v-if="item.description" spaced="md"/>
+              <q-separator dark v-if="item.description" spaced="md"/>
+              <p class="text-h6 no-margin  ">{{item.name}}</p>
+              <p class="text-body2 no-margin  ">Назначение: {{item.purpose}}</p>
+              <q-separator dark v-if="item.description" spaced="md"/>
               <q-scroll-area style="height: 100px;">
-              <p v-if="item.description" class="no-margin" v-html="item.description"></p>
+              <p v-if="item.description" class="no-margin text-caption" v-html="item.description"></p>
               </q-scroll-area>
             </q-card-section>
    </router-link>

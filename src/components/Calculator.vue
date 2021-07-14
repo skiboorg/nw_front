@@ -264,6 +264,7 @@ export default {
   watch: {
     'avaiable_points'(val){
       if(val===0){
+        console.log('done')
         this.$emit('done',
         {
         checked_skills_left:this.weapon.trees[0].checked_skills,
@@ -273,6 +274,9 @@ export default {
         weapon:this.weapon.id,
       }
         )
+      }else{
+        console.log('not_done')
+        this.$emit('not_done')
       }
 
 },

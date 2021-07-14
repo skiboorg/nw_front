@@ -1,26 +1,63 @@
 <template>
-<q-page >
- <div class="container">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center q-py-lg">
-            <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
-            <h3 class="text-h5">Билды</h3>
-          </div>
-          <q-btn to="/skills" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
+  <q-page >
+    <div class="container">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center q-py-lg">
+          <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
+          <h3 class="text-h5">Билды</h3>
+        </div>
+        <q-btn to="/skills" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
+      </div>
+
+      <q-list dark>
+
+        <div class="" v-for="build in builds"
+             :key="build.id">
+          <q-item clickable :to="`/builds/${build.name_slug}`">
+            <q-item-section>
+              <q-item-label>{{build.name}}</q-item-label>
+
+            </q-item-section>
+             <q-item-section>
+              <q-item-label >{{build.purpose}} </q-item-label>
+            </q-item-section>
+
+
+            <q-item-section>
+              <q-item-label >{{build.weapon1.name}} / {{build.weapon2.name}}</q-item-label>
+            </q-item-section>
+            <q-item-section class="">
+              <div class="flex">
+                <p class="q-mb-none  q-mr-sm"> Рейтинг:</p>
+                 <q-rating
+                v-model="build.rating"
+                size="12px"
+                color="primary"
+                readonly
+              />
+              </div>
+
+
+            </q-item-section>
+
+            <q-item-section side >
+              <q-item-label >{{new Date(build.created_at).toLocaleString() }}</q-item-label>
+
+            </q-item-section>
+          </q-item>
+
+          <q-separator dark   />
         </div>
 
-   <div class="companies-grid">
-          <BuildCard
-          v-for="build in builds"
-            :key="build.id"
-            :item="build"
-          />
-   </div>
+
+
+      </q-list>
+
 
 
 
     </div>
-</q-page>
+  </q-page>
 </template>
 
 <script>
@@ -62,7 +99,7 @@ export default {
     }
   },
   async mounted() {
-     const response = await this.$api.get(`/api/skill/build?for=all`)
+    const response = await this.$api.get(`/api/skill/build?for=all`)
     this.builds = response.data
 
   },

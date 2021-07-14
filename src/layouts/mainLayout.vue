@@ -37,7 +37,7 @@
                 </q-item>
               </q-list>
             </q-btn-dropdown>
-            <q-route-tab name="calc" label="Калькулятор (v0.3)" to="/skills"/>
+            <q-route-tab name="calc" label="Калькулятор (v0.4)" to="/skills"/>
 
             <q-route-tab name="map" label="Карта" to="/map"/>
 <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->

@@ -9,7 +9,8 @@
       <Calculator weapon_title="Выберите второй набор" :weapon_num="2" @done="secondDone" @not_done="not_done" @changeSecondWeapon="changeSecondWeapon"/>
       <!-- -->
 
-      <div class="characteristics q-mb-md">
+     <div v-if="showForm && done" class="">
+       <div v-if="!is_build_saved" class="characteristics q-mb-md">
         <q-separator dark spaced="lg"></q-separator>
         <div class="characteristics-row" v-for="(characteristic,index) in characteristics" :key="characteristic.id">
           <div class="">
@@ -110,12 +111,8 @@
            <p class="text-bold text-h6 q-mb-none">Осталось очков: {{can_add}}</p>
           <q-btn color="primary" text-color="dark" @click="resetPoints" label="Сброс"/>
         </div>
-
-
       </div>
-
-<!--v-if="showForm && done"-->
-      <div  class=" q-mb-lg">
+       <div  class=" q-mb-lg">
         <div v-if="!is_build_saved">
 
           <div class="flex justify-between">
@@ -205,11 +202,16 @@
           <q-btn @click="saveBuild" :disable="!build_description || !build_name" :loading="is_loading" color="primary" text-color="dark" no-caps label="Сохранить"/>
         </div>
         <div v-else class="">
-          <p>Ссылка на билд: <span class="text-primary inline-block q-mx-sm">https://www.nwfans.ru/build/{{build_slug}}</span>
+          <p class="text-h6 text-bold">Ссылка на билд: <span class="text-primary  inline-block q-mx-sm">https://www.nwfans.ru/build/{{build_slug}}</span>
             <span @click="copyCB(`https://www.nwfans.ru/build/${build_slug}`)" class="text-caption cursor-pointer"
                   style="border-bottom: 1px dashed #fff">{{is_copied ? 'скопировано' : 'скопировать в буфер'}}</span></p>
         </div>
       </div>
+     </div>
+
+
+<!---->
+
     </div>
 
 

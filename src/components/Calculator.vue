@@ -3,7 +3,7 @@
 
         <q-tab-panel name="choose">
 
-          <div class="text-h6 q-mb-md">{{weapon_title}}</div>
+          <div class="text-h5 text-bold text-primary q-mb-md">{{weapon_title}}</div>
 
           <div class="weapon-grid">
             <q-card  flat v-if="!item.is_selected" @click="selectWeapon(index)" v-for="(item,index) in weapons" :key="item.id" class="weapon-card cursor-pointer bg-grey-5 ">
@@ -22,14 +22,14 @@
           <div  class="flex items-center justify-between">
             <div @click="closeCalc" class="flex items-center q-mb-md cursor-pointer">
               <q-icon size="30px" name="west" color="primary" class="q-mr-lg"/>
-            <p class="q-mb-none text-h6 text-primary ">Выбрать другое оружие</p>
+            <p class="q-mb-none text-h6 text-bold text-primary ">Выбрать другое оружие</p>
             </div>
 
 
             <q-btn @click="reset" color="primary" text-color="dark" label="Сброс вложенных очков"/>
           </div>
           <div class="text-center">
-             <p class="q-mb-none text-h5 text-bold">{{weapon.name}}</p>
+             <p class="q-mb-none text-h5 text-bold text-primary">{{weapon.name}}</p>
           <p class="q-mb-none text-body2" v-html="weapon.description"></p>
           </div>
 
@@ -37,7 +37,7 @@
 
             <div  class="skill-tree" v-for="(tree,tree_index) in weapon.trees" :key="tree.id">
 
-              <p class="text-center text-h5 q-mb-none">{{tree.name_en}} </p>
+              <p class="text-center text-h5 q-mb-none text-primary text-bold">{{tree.name_en}} </p>
               <p class="text-center text-caption ">{{tree.name}}</p>
               <p class="text-center text-body1 ">Вложено очков :
                 {{tree_index===0 ? points_spent_left : points_spent_right}} (Доступно {{avaiable_points}})

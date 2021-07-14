@@ -241,19 +241,32 @@ export default {
     this.feedbackData.build_id = this.build.id
     for(const [key, value] of Object.entries(this.build.checked_skills_left_w1)){
       let skill_id = parseInt(key.split('_')[2])
-      this.build.weapon1.trees[0].skills.find(x=>x.id===skill_id).is_checked = true
+
+      if (value){
+        this.build.weapon1.trees[0].skills.find(x=>x.id===skill_id).is_checked = true
+      }
+
     }
     for(const [key, value] of Object.entries(this.build.checked_skills_right_w1)){
       let skill_id = parseInt(key.split('_')[2])
-      this.build.weapon1.trees[1].skills.find(x=>x.id===skill_id).is_checked = true
+      if (value){
+         this.build.weapon1.trees[1].skills.find(x=>x.id===skill_id).is_checked = true
+      }
+
     }
     for(const [key, value] of Object.entries(this.build.checked_skills_left_w2)){
       let skill_id = parseInt(key.split('_')[2])
-      this.build.weapon2.trees[0].skills.find(x=>x.id===skill_id).is_checked = true
+      if (value){
+        this.build.weapon2.trees[0].skills.find(x=>x.id===skill_id).is_checked = true
+      }
+
     }
     for(const [key, value] of Object.entries(this.build.checked_skills_right_w2)){
       let skill_id = parseInt(key.split('_')[2])
-      this.build.weapon2.trees[1].skills.find(x=>x.id===skill_id).is_checked = true
+      if (value){
+        this.build.weapon2.trees[1].skills.find(x=>x.id===skill_id).is_checked = true
+      }
+
     }
 
 

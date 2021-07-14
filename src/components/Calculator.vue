@@ -36,7 +36,7 @@
           <div  class="skills-wrapper q-mb-lg">
 
             <div  class="skill-tree" v-for="(tree,tree_index) in weapon.trees" :key="tree.id">
-
+              {{weapon.trees[0].checked_skills}}
               <p class="text-center text-h5 q-mb-none text-primary text-bold">{{tree.name_en}} </p>
               <p class="text-center text-caption ">{{tree.name}}</p>
               <p class="text-center text-body1 ">Вложено очков :

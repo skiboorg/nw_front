@@ -203,7 +203,7 @@
         </div>
         <div v-else class="">
           <p class="text-h6 text-bold">Ссылка на билд: <span class="text-primary  inline-block q-mx-sm">https://www.nwfans.ru/builds/{{build_slug}}</span>
-            <span @click="copyCB(`https://www.nwfans.ru/build/${build_slug}`)" class="text-caption cursor-pointer"
+            <span @click="copyCB(`https://www.nwfans.ru/builds/${build_slug}`)" class="text-caption cursor-pointer"
                   style="border-bottom: 1px dashed #fff">{{is_copied ? 'скопировано' : 'скопировать в буфер'}}</span></p>
         </div>
       </div>

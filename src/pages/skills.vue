@@ -5,8 +5,8 @@
     <div class="container">
       <p class="text-body2 text-center q-mb-none q-mt-md">Для сохранения билда выберите оба оружия и распределите все доступные очки</p>
 
-      <Calculator weapon_title="Выберите первый набор" :weapon_num="1" @done="firstDone" @not_done="not_done" @changeFirstWeapon="changeFirstWeapon"/>
-      <Calculator weapon_title="Выберите второй набор" :weapon_num="2" @done="secondDone" @not_done="not_done" @changeSecondWeapon="changeSecondWeapon"/>
+      <Calculator weapon_title="Первое оружие" :weapon_num="1" @done="firstDone" @not_done="not_done" @changeFirstWeapon="changeFirstWeapon"/>
+      <Calculator weapon_title="Второе оружие" :weapon_num="2" @done="secondDone" @not_done="not_done" @changeSecondWeapon="changeSecondWeapon"/>
       <!-- -->
 
      <div v-if="showForm && done" class="">

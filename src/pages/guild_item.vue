@@ -8,10 +8,15 @@
 
 
       <div class="container">
-        <div v-if="guild.image" class="text-center q-mb-lg">
+        <div class="guild-wrapper">
+          <div v-if="guild.image" class="text-center q-mb-lg">
           <img style="max-width: 100%;height: auto;object-fit: contain" :src="guild.image" alt="">
         </div>
-        <div class="post-content" v-html="guild.description"></div>
+         <div class="post-content" v-html="guild.description"></div>
+        </div>
+
+
+
         <q-separator spaced="lg"/>
         <p class="text-h6">Отзывы о компании</p>
         <p v-if="!feedbacks.length>0">Отзывов пока нет</p>
@@ -152,6 +157,10 @@ export default {
 }
 </script>
 <style lang="sass">
+.guild-wrapper
+  display: grid
+  grid-template-columns: 2fr 3fr
+  grid-gap: 20px
 .custom-caption
   text-align: center
   padding: 12px
@@ -161,4 +170,7 @@ export default {
   img
     max-width: 100% !important
     height: auto !important
+@media (max-width: 1024px)
+  .guild-wrapper
+    grid-template-columns: 1fr
 </style>

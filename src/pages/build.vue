@@ -115,15 +115,14 @@
 
     <q-card dark class="q-mb-md">
       <q-card-section>
-         <p class="text-h6">Описание билда</p>
+         <p class="text-h6 text-bold">Описание билда</p>
     <p v-html="build.description"></p>
       </q-card-section>
     </q-card>
 
     </div>
 
-{{feedbackData.build_id}}
-    <p class="text-h6">Отзывы </p>
+    <p class="text-h6 text-bold">Отзывы </p>
         <p v-if="!build.feedbacks.length>0">Отзывов пока нет</p>
         <q-list class="q-mb-lg" dark>
 
@@ -151,13 +150,13 @@
         <q-btn v-if="$user.loggedIn && !addFeedback" @click="addFeedback = true" icon="add" no-caps color="primary" text-color="dark" label="Добавить отзыв"/>
             <q-btn v-if="!$user.loggedIn" @click="changeauthModalVisible(true)" icon="add" no-caps color="primary" text-color="dark" label="Добавить отзыв"/>
 <div v-if="addFeedback" class="addFeedback q-mt-lg">
-          <div class="flex q-mb-md"><p class="q-mb-none q-mr-md">Рейтинг</p>
+          <div class="flex q-mb-md"><p class="q-mb-none q-mr-md text-bold">Рейтинг</p>
             <q-rating
               v-model="feedbackData.rating"
-              size="1em"
+              size="18px"
               color="primary"
             /></div>
-          <p>Отзыв</p>
+          <p class="text-bold">Отзыв</p>
           <q-input
             v-model="feedbackData.text"
             filled
@@ -165,7 +164,7 @@
             class="q-mb-md text-white"
             type="textarea"
           />
-          <q-btn :loading="is_loading" :disable="!feedbackData.text.length>0"
+          <q-btn  :loading="is_loading" :disable="!feedbackData.text.length>0 || !feedbackData.rating>0"
                  @click="createFeedback"
                  icon="add" no-caps color="primary" text-color="dark" label="Отправить"/>
 

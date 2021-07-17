@@ -78,7 +78,16 @@
             </div>
           </router-link>
 
+          <q-card dark   class="bg-grey-10 rs-card  cursor-pointer q-mb-md">
+            <router-link  to="/companies/red-sky">
+              <q-card-section  class="text-center q-pa-none">
+               <q-img :ratio="16/9" src="~assets/rs.png"></q-img>
+              </q-card-section>
+            </router-link>
+          </q-card>
+
           <CompanyCard
+            v-if="guild.name_slug!=='red-sky'"
             v-for="guild in guilds"
             :key="guild.id"
             :item="guild"
@@ -90,11 +99,11 @@
           </div>
           <q-separator spaced="lg"/>
           <router-link to="/builds">
-          <div class="flex items-center">
+            <div class="flex items-center">
 
-            <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
-            <h3 class="text-h5 text-title">Новые билды</h3>
-          </div>
+              <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
+              <h3 class="text-h5 text-title">Новые билды</h3>
+            </div>
           </router-link>
 
           <BuildCard
@@ -194,5 +203,32 @@ export default {
   padding: 12px
   color: white
   background-color: rgba(0, 0, 0, .3)
+.rs-card
+  animation: pulse 2s infinite
+
+@-webkit-keyframes pulse
+  0%
+    -webkit-box-shadow: 0 0 0 0 rgba(216,28,35, 0.4)
+
+  70%
+      -webkit-box-shadow: 0 0 0 10px rgba(216,28,35, 0)
+
+  100%
+      -webkit-box-shadow: 0 0 0 0 rgba(216,28,35, 0)
+
+
+@keyframes pulse
+  0%
+    -moz-box-shadow: 0 0 0 0 rgba(216,28,35, 0.4)
+    box-shadow: 0 0 0 0 rgba(216,28,35, 0.4)
+
+  70%
+      -moz-box-shadow: 0 0 0 10px rgba(216,28,35, 0)
+      box-shadow: 0 0 0 10px rgba(216,28,35, 0)
+
+  100%
+      -moz-box-shadow: 0 0 0 0 rgba(216,28,35, 0)
+      box-shadow: 0 0 0 0 rgba(216,28,35, 0)
+
 
 </style>

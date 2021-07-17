@@ -3,14 +3,15 @@
     <div class="container">
       <div class="flex items-center justify-between">
          <h1 class="text-white text-h3">{{guild.name}}</h1>
-        <p v-if="guild.discord_link" class="q-mb-none text-h6 text-primary"><a class="text-primary" target="_blank" :href="guild.discord_link">Ссылка на Discord</a></p>
+
       </div>
 
 
       <div class="container">
         <div class="guild-wrapper">
           <div v-if="guild.image" class="text-center q-mb-lg">
-          <img style="max-width: 100%;height: auto;object-fit: contain" :src="guild.image" alt="">
+          <img style="max-width: 100%;height: auto;object-fit: contain;margin-bottom: 30px" :src="guild.image" alt="">
+            <a class="inline-block q-py-sm q-px-lg q-btn q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--wrap q-btn--active" v-if="guild.discord_link" target="_blank" :href="guild.discord_link">Ссылка на Discord</a>
         </div>
          <div class="post-content" v-html="guild.description"></div>
         </div>

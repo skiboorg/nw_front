@@ -13,6 +13,11 @@
       dark
     >
       <q-list  dark >
+        <q-item >
+          <q-item-section>
+            <p class="q-mb-none text-red text-bold text-center">Информация основана на альфа тесте и будет дополнятся и изменяться</p>
+          </q-item-section>
+        </q-item>
         <q-item clickable v-ripple >
           <q-item-section>
             <q-toggle

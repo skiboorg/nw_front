@@ -8,9 +8,7 @@
       <Calculator weapon_title="Первое оружие" :weapon_num="1" @done="firstDone" @not_done="not_done" @changeFirstWeapon="changeFirstWeapon"/>
       <Calculator weapon_title="Второе оружие" :weapon_num="2" @done="secondDone" @not_done="not_done" @changeSecondWeapon="changeSecondWeapon"/>
       <!-- -->
-
-     <div v-if="showForm && done" class="">
-       <div v-if="!is_build_saved" class="characteristics q-mb-md">
+<div  class="characteristics q-mb-md">
         <q-separator dark spaced="lg"></q-separator>
         <div class="characteristics-row" v-for="(characteristic,index) in characteristics" :key="characteristic.id">
           <div class="">
@@ -112,10 +110,13 @@
           <q-btn color="primary" text-color="dark" @click="resetPoints" label="Сброс"/>
         </div>
       </div>
+     <div v-if="showForm && done" class="">
+
        <div  class=" q-mb-lg">
         <div v-if="!is_build_saved">
 
           <div class="flex justify-between">
+            <q-checkbox v-model="build_private" color="red" class="q-mb-sm" dark label="Приватный билд (доступен только по ссылке и не отображается в общем списке)" />
             <q-input style="flex-basis: 49%" v-model="build_name" class="q-mb-md" filled label="Название" dark/>
            <q-select style="flex-basis: 49%" dark v-model="build_purpose" filled :options="options" label="Назначение" />
           </div>
@@ -263,6 +264,7 @@ export default {
       is_copied:false,
       build_name:null,
       build_purpose:'Универсальный',
+      build_private:false,
       build_description:null,
       build_slug:null,
       characteristics:[],
@@ -351,7 +353,8 @@ export default {
         purpose:this.build_purpose,
         weapon1:this.firstWeapon.weapon,
         weapon2:this.secondWeapon.weapon,
-        characteristics:this.characteristics
+        characteristics:this.characteristics,
+        is_private:this.build_private
       })
       this.is_build_saved = true
       this.build_slug = response.data.slug

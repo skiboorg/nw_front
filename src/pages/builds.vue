@@ -9,9 +9,26 @@
         <q-btn to="/skills" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
       </div>
 
+      <q-card dark class="q-mb-lg">
+        <q-card-section>
+          <p class="q-mb-md text-h6 text-bold text-primary">Фильтры</p>
+
+          <div class=" row q-mb-md">
+
+             <q-select class="col-6 q-pr-xs" style="flex-basis: 49%" dark v-model="build_purpose" filled :options="build_purposes" label="Назначение" />
+            <q-select class="col-6 q-pl-xs"  style="flex-basis: 49%" dark v-model="build_weapon" filled :options="build_weapons"  label="Оружие" >
+
+            </q-select>
+          </div>
+
+          <q-btn text-color="dark" color="primary" @click="filterBuilds" label="Показать"/>
+        </q-card-section>
+      </q-card>
+
+
       <q-list dark>
 
-        <div class="" v-for="build in builds"
+        <div class="" v-for="build in fiter_builds"
              :key="build.id">
           <q-item clickable :to="`/builds/${build.name_slug}`">
             <q-item-section>
@@ -65,6 +82,7 @@
 
 import NewsCard from "components/NewsCard";
 import BuildCard from "components/BuildCard";
+
 export default {
   components: {BuildCard, NewsCard},
   name: 'MainLayout',
@@ -94,18 +112,48 @@ export default {
     return {
       slide:'first',
       autoplay:true,
-      builds:[]
+      builds:[],
+      fiter_builds:[],
+      build_purpose:'Любое назначение',
+      build_weapon:'Любое оружие',
+      build_purposes: [
+        'Любое назначение', 'ПвП', 'ПвЕ', 'Осады', 'Данжи', 'Универсальный'
+      ],
+      build_weapons:[
+        'Любое оружие','Меч и щит','Боевой молот','Секира','Топор','Лук','Мушкет','Рапира','Копье','Посох жизни','Посох огня','Ледяная перчатка']
 
     }
   },
   async mounted() {
+
     const response = await this.$api.get(`/api/skill/build?for=all`)
     this.builds = response.data
+    this.fiter_builds = this.builds
 
   },
   methods:{
 
+    filterBuilds(){
+      console.log(this.builds)
+      if (this.build_weapon !=='Любое оружие'){
+        this.fiter_builds=[]
+        for(let i of this.builds){
+          if (i.weapon1.name === this.build_weapon || i.weapon2.name === this.build_weapon){
+            this.fiter_builds.push(i)
+          }
+        }
+      }else {
+        this.fiter_builds=this.builds
+      }
+
+      if (this.build_purpose !=='Любое назначение'){
+        this.fiter_builds = this.fiter_builds.filter(x=> x.purpose === this.build_purpose)
+      }
+
+
+    }
   },
+
 
 }
 </script>

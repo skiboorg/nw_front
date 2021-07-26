@@ -1,7 +1,7 @@
 
 const routes = [
   {
-    path: '/map',
+    path: '/mapp',
     component: () => import('layouts/mapLayout.vue'),
     children: [
       { path: '', component: () => import('pages/map.vue') }

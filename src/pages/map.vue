@@ -1,8 +1,8 @@
 <template>
   <q-page style="overflow: hidden">
-     <q-page-sticky style="z-index: 1000" position="top-left" :offset="[18, 18]">
-            <q-btn @click="leftDrawerOpen = !leftDrawerOpen" fab :icon="leftDrawerOpen ? 'west': 'east'" color="primary" />
-          </q-page-sticky>
+    <q-page-sticky style="z-index: 1000" position="top-left" :offset="[18, 18]">
+      <q-btn @click="leftDrawerOpen = !leftDrawerOpen" fab :icon="leftDrawerOpen ? 'west': 'east'" color="primary" />
+    </q-page-sticky>
 
 
 
@@ -15,10 +15,10 @@
       <q-list  dark >
         <q-item >
           <q-item-section>
-            <p class="q-mb-none text-red text-bold text-center">Информация основана на альфа тесте и будет дополнятся и изменяться</p>
+            <p class="q-mb-none text-red text-bold text-center">Информация будет дополняться и изменяться</p>
           </q-item-section>
         </q-item>
-        <q-item clickable v-ripple >
+         <q-item clickable v-ripple >
           <q-item-section>
             <q-toggle
               v-model="is_poi_visible"
@@ -26,6 +26,7 @@
             />
           </q-item-section>
         </q-item>
+
         <q-item clickable v-ripple v-for="(type,index) in categoryTypes" :key="type.id">
           <q-item-section>
             <q-toggle
@@ -34,13 +35,13 @@
               :style="{color: type.marker_color}"
               :label="`Показывать ${type.name.toLowerCase()}`"
             />
-             <q-toggle
-               dense
-               class="q-mb-sm q-px-md"
-               :style="{color: type.marker_color}"
-               @input="categoryChange(index)"
-               v-for="(category,cat_index) in type.category"
-               :key="category.id"
+            <q-toggle
+              dense
+              class="q-mb-sm q-px-md"
+              :style="{color: type.marker_color}"
+              @input="categoryChange(index)"
+              v-for="(category,cat_index) in type.category"
+              :key="category.id"
               v-model="category.is_visible"
               :label="`${category.name} (${category.name_en})`"
             />
@@ -57,30 +58,27 @@
     </q-drawer>
 
 
-      <q-no-ssr>
-        <l-map
-          @click="addMarker"
-          ref="map"
+    <q-no-ssr>
+      <l-map
+        @click="addMarker"
+        ref="map"
+        :bounds="bounds"
+        :zoom="10"
+        :crs="crs"
+        :attributionControl = "attributionControl"
+        :zoomControl="!1"
+        preferCanvas
+        style="height: 100vh; width: 100vw;background: #000">
+        <l-tile-layer
+          :url="url"
+          :tileSize='tileSize'
+          :noWrap="noWrap"
+          :min-zoom="minZoom"
+          :max-zoom="maxZoom"
+
           :bounds="bounds"
-          :zoom="10"
-          :crs="crs"
-
-          :attributionControl = "attributionControl"
-          :zoomControl="!1"
-          preferCanvas
-
-          style="height: 100vh; width: 100vw;background: #000"
-        >
-          <l-tile-layer
-            :url="url"
-            :tileSize='tileSize'
-            :noWrap="noWrap"
-            :min-zoom="minZoom"
-            :max-zoom="maxZoom"
-
-            :bounds="bounds"
-          />
-          <div class="">
+        />
+        <div class="">
              <l-marker
             v-if="is_poi_visible"
             :lat-lng="[poi.lat, poi.lng]"
@@ -91,37 +89,53 @@
               :icon-size="iconSize"
               :icon-url="poi.image"
             />
-            <l-popup :content="poi.name_en" />
+            <l-popup :content="`<b>${poi.name }</b><br>(${poi.name_en }) <br><br><b>${poi.description}</b><br>(${poi.description_en})`" />
           </l-marker>
           </div>
-          <div v-if="type.is_visible" class="" v-for="type in categoryTypes" :key="type.id">
-            <div v-if="category.is_visible" v-for="category in type.category" :key="category.id">
-<!--               <l-marker-->
-<!--            :lat-lng="[res.lat, res.lng]"-->
-<!--            v-for="(res,index) in category.resourses"-->
-<!--            :key="index"-->
-<!--          >-->
-<!--            <l-icon-->
-<!--              :icon-size="iconSize"-->
-<!--              :icon-url="category.image"-->
-<!--            />-->
 
-<!--          </l-marker>-->
-              <l-circle-marker
-              :lat-lng="[res.lat, res.lng]"
-                v-for="(res,index) in category.resourses"
-                :key="index"
-              :color="type.marker_color"
-              :radius="6"
-              >
-                <l-popup :content="`${category.name }<br>(${category.name_en })<br>${res.description}`" />
-              </l-circle-marker>
-            </div>
-
+        <div v-if="type.is_visible" class="" v-for="type in categoryTypes" :key="type.id">
+          <div v-if="category.is_visible" v-for="category in type.category" :key="category.id">
+<!--            <l-marker-->
+<!--              :lat-lng="[res.lat, res.lng]"-->
+<!--              v-for="(res,index) in category.resourses"-->
+<!--              :key="index">-->
+<!--              <l-icon-->
+<!--                :icon-size="iconSize"-->
+<!--                :icon-url="category.image"/>-->
+<!--              <l-popup :content="`<b>${category.name_en }</b><br>(${category.name }) <br>${res.description}`" />-->
+<!--            </l-marker>-->
+            <v-marker-cluster :options="{maxClusterRadius:30,zoomToBoundsOnClick:false}">
+                             <l-circle-marker
+                          :lat-lng="[res.lat, res.lng]"
+                            v-for="(res,index) in category.resourses"
+                            :key="index"
+                          :color="type.marker_color"
+                          :radius="6"
+                          >
+                            <l-popup :content="`${category.name }<br>(${category.name_en }) ${category.image}<br>${res.description}`" />
+                          </l-circle-marker>
+<!--              <l-marker v-for="(res,index) in category.resourses" :key="index" :lat-lng="[res.lat, res.lng]" >-->
+<!--                <l-icon-->
+<!--                :icon-size="iconSize"-->
+<!--               :icon-url="category.image"/>-->
+<!--                <l-popup :content="`<b>${category.name_en }</b><br>(${category.name }) <br>${res.description_en}`"></l-popup>-->
+<!--              </l-marker>-->
+            </v-marker-cluster>
+            <!--              <l-circle-marker-->
+            <!--              :lat-lng="[res.lat, res.lng]"-->
+            <!--                v-for="(res,index) in category.resourses"-->
+            <!--                :key="index"-->
+            <!--              :color="type.marker_color"-->
+            <!--              :radius="6"-->
+            <!--              >-->
+            <!--                <l-popup :content="`${category.name }<br>(${category.name_en }) ${category.image}<br>${res.description}`" />-->
+            <!--              </l-circle-marker>-->
           </div>
 
-        </l-map>
-      </q-no-ssr>
+        </div>
+
+      </l-map>
+    </q-no-ssr>
 
 
 
@@ -137,9 +151,13 @@ import {mapActions, mapGetters} from "vuex";
 
 let Vue2Leaflet = {}
 import "leaflet/dist/leaflet.css";
-if (!process.env.SERVER) {
-  Vue2Leaflet = require('vue2-leaflet')
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+let Vu2Cluster ={}
 
+if (!process.env.SERVER) {
+  //Vu2Cluster = require('vue2-leaflet-markercluster')
+  Vue2Leaflet = require('vue2-leaflet')
 }
 export default {
   components: {
@@ -147,15 +165,16 @@ export default {
     'l-marker':Vue2Leaflet.LMarker,
     'l-circle-marker':Vue2Leaflet.LCircleMarker,
     'l-popup':Vue2Leaflet.LPopup,
-    'l-icon':Vue2Leaflet.LIcon
+    'l-icon':Vue2Leaflet.LIcon,
+    //'v-marker-cluster': Vu2Cluster.Vue2LeafletMarkerCluster
 
   },
 
   data() {
     return {
       tab:'map',
-      leftDrawerOpen: true,
       is_poi_visible:true,
+      leftDrawerOpen: true,
       iconSize: [54, 54],
       iconAnchor: [16, 37],
       pois:[{
@@ -204,7 +223,7 @@ export default {
     this.pois = response.data
     const response_types = await this.$api.get('/api/map/resourse')
     this.categoryTypes = response_types.data
-    console.log(this.pois)
+
 
 
   },
@@ -215,8 +234,8 @@ export default {
     typeChange(index){
       if(!this.categoryTypes[index].is_visible){
         for (let  x of this.categoryTypes[index].category){
-        x.is_visible = false
-      }
+          x.is_visible = false
+        }
       }
 
     },

@@ -89,7 +89,7 @@
               :icon-size="iconSize"
               :icon-url="poi.image"
             />
-            <l-popup :content="`<b>${poi.name }</b><br>(${poi.name_en }) <br><br><b>${poi.description}</b><br>(${poi.description_en})`" />
+            <l-popup :content="`<b>${poi.name }</b><br>(${poi.name_en }) <br><br><b>${poi.description}</b><br>(${poi.description_en})<br><br>Уровень ${poi.level ? poi.level : '--'}`" />
           </l-marker>
           </div>
 
@@ -110,9 +110,9 @@
                             v-for="(res,index) in category.resourses"
                             :key="index"
                           :color="type.marker_color"
-                          :radius="6"
+                          :radius="5"
                           >
-                            <l-popup :content="`${category.name }<br>(${category.name_en }) ${category.image}<br>${res.description}`" />
+                            <l-popup :content="`<b>${category.name_en }</b><br>${res.name}<br>${res.description}`" />
                           </l-circle-marker>
 <!--              <l-marker v-for="(res,index) in category.resourses" :key="index" :lat-lng="[res.lat, res.lng]" >-->
 <!--                <l-icon-->

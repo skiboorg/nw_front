@@ -57,7 +57,9 @@
         </q-toolbar>
       </div>
 
+
     </q-header>
+
     <q-drawer
       v-model="leftDrawerOpen"
       side="right"
@@ -127,6 +129,9 @@
 
     </q-drawer>
     <q-page-container>
+       <a v-if="showAd" class="block text-center" target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">
+            <img src="~assets/izi.gif" alt="">
+          </a>
       <router-view />
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
             <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
@@ -432,6 +437,7 @@ export default {
   data () {
     return {
       tab:'index',
+      showAd:false,
       leftDrawerOpen:false,
       is_loading:false,
       feedbackModal:false,
@@ -480,6 +486,15 @@ export default {
 
 
     }
+  },
+  watch:{
+    '$route.path'(val){
+      console.log(val)
+      val === '/' ? this.showAd = false : this.showAd = true
+    }
+  },
+  beforeMount() {
+    this.$route.path === '/' ? this.showAd = false : this.showAd = true
   },
   methods:{
     ...mapActions('componentState',['changeauthModalVisible',"changeguildCreateModalVisible"]),

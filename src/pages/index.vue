@@ -30,6 +30,10 @@
     <div class="container">
       <div class="page-wrapper">
         <div class="page-left">
+          <a target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">
+            <img style="width: 100%; height: auto" src="~assets/izi.gif" alt="">
+          </a>
+
           <div class="flex items-center ">
             <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
             <h3 class="text-h5">Социальные сети</h3>
@@ -70,6 +74,7 @@
           />
         </div>
         <div class="page-right">
+
           <router-link to="/companies">
             <div class="flex items-center ">
               <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />

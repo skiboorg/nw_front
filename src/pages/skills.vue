@@ -113,12 +113,15 @@
      <div v-if="showForm && done" class="">
 
        <div  class=" q-mb-lg">
+
         <div v-if="!is_build_saved">
 
-          <div class="flex justify-between">
-            <q-checkbox v-model="build_private" color="red" class="q-mb-sm" dark label="Приватный билд (доступен только по ссылке и не отображается в общем списке)" />
-            <q-input style="flex-basis: 49%" v-model="build_name" class="q-mb-md" filled label="Название" dark/>
-           <q-select style="flex-basis: 49%" dark v-model="build_purpose" filled :options="options" label="Назначение" />
+          <div class="flex wrap justify-between">
+              <q-input style="flex-basis: 33%" v-model="build_name" class="q-mb-md" filled label="Название" dark/>
+           <q-select style="flex-basis: 33%" dark v-model="build_purpose" filled :options="options" label="Назначение" />
+           <q-select style="flex-basis: 33%" dark v-model="build_role" filled :options="build_role_options" label="Роль" />
+            <q-checkbox v-model="build_private" color="red" class="q-mb-sm full-width" dark label="Приватный билд (доступен только по ссылке и не отображается в общем списке)" />
+
           </div>
 
 
@@ -265,13 +268,15 @@ export default {
       is_copied:false,
       build_name:null,
       build_purpose:'Универсальный',
+      build_role:'Не указана',
       build_private:false,
       build_description:null,
       build_slug:null,
       characteristics:[],
        options: [
         'ПвП', 'ПвЕ', 'Осады', 'Данжи', 'Универсальный'
-      ]
+      ],
+      build_role_options:['Не указана','Танк','Хил','ДД','РДД']
 
 
     }
@@ -350,6 +355,7 @@ export default {
         description:this.build_description,
         name:this.build_name,
         purpose:this.build_purpose,
+        role:this.build_role,
         weapon1:this.firstWeapon.weapon,
         weapon2:this.secondWeapon.weapon,
         characteristics:this.characteristics,

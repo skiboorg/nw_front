@@ -3,7 +3,7 @@
 
   <q-page class="">
     <div class="container">
-      <p class="text-body2 text-center q-mb-none q-mt-md">Для сохранения билда выберите оба оружия и распределите все доступные очки</p>
+      <h1 class="text-h5 text-center q-mb-none q-mt-md">Калькулятор умений</h1>
 
       <Calculator weapon_title="Первое оружие" :weapon_num="1" @done="firstDone" @not_done="not_done" @changeFirstWeapon="changeFirstWeapon"/>
       <Calculator weapon_title="Второе оружие" :weapon_num="2" @done="secondDone" @not_done="not_done" @changeSecondWeapon="changeSecondWeapon"/>
@@ -228,26 +228,27 @@ import {mapActions,mapGetters} from "vuex"
 import {api} from "boot/axios";
 
 export default {
-  components: {Calculator},
+   async preFetch ({store}) {
+     if (store.state.weapons.weapons.length === 0){
+        return await store.dispatch('weapons/fetchWeapons')
+    }
+
+   },
   meta: {
-    // sets document title
-    title: 'New World Fans | Калькулятор умений',
-
-
+    title: 'New World Fans | Калькулятор умений и талантов',
     // meta tags
     meta: {
-      description: {name: 'Калькулятор билдов и описание скилов игры New World'},
-      keywords: {name: 'keywords', content: 'Калькулятор билдов и описание скилов игры New World'},
-
+      description: {name: 'description', content: 'Собрали для тебя удобный калькулятор умений для New World, для сохранения билда сделайте и распределите все доступные очки'},
       ogTitle: {
         name: 'og:title',
-        // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `New World Fans | Калькулятор умений`
+          return `New World Fans | Калькулятор умений и талантов`
         }
       }
     }
   },
+  components: {Calculator},
+
 
 
   data() {
@@ -276,12 +277,10 @@ export default {
     }
   },
   async mounted() {
-    await this.fetchWeapons()
     const response = await api.get('/api/skill/characteristics')
     this.characteristics = response.data
   },
   methods:{
-    ...mapActions('weapons',['fetchWeapons']),
     resetPoints(){
       this.points_spent = 0
       this.total_points = 190

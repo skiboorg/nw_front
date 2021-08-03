@@ -1,7 +1,5 @@
 import {Cookies, LocalStorage} from 'quasar'
 
-// const token = LocalStorage.getItem('auth_token')
-
 export default async ({ app, router, Vue, store, ssrContext }) => {
   console.info('boot: init entered', store)
   const cookies = process.env.SERVER
@@ -16,6 +14,7 @@ export default async ({ app, router, Vue, store, ssrContext }) => {
      //   store.dispatch('auth/connectWS', store.state.auth.user.id)
      // }
   }
+
   Vue.prototype.$user = store.state.auth
   console.info('boot: init exited')
 }

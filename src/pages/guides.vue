@@ -7,9 +7,9 @@
             <h1 class="text-h5">Гайды New World</h1>
           </div>
     <div class="q-gutter-md">
-      <q-btn color="primary" @click="$scrollTo(`#cat_${category.id}`, 200, {offset: -90})" text-color="dark" :label="category.name" v-for="category in categories" :key="category.id"/>
+      <q-btn color="primary" @click="$scrollTo(`#cat_${category.id}`, 200, {offset: -90})" text-color="dark" :label="category.name" v-for="category in guides" :key="category.id"/>
     </div>
-    <div :id="`cat_${category.id}`" class="" v-for="category in categories" :key="category.id">
+    <div :id="`cat_${category.id}`" class="" v-for="category in guides" :key="category.id">
       <h3 class="text-h5 text-primary text-bold">{{category.name}}</h3>
       <q-separator spaced="lg"/>
        <div class="companies-grid">
@@ -32,45 +32,34 @@
 
 
 import GuideCard from "components/GuideCard";
+import {mapGetters} from "vuex";
 export default {
-  name: 'MainLayout',
   components: {GuideCard},
-  meta: {
-    // sets document title
-    title: 'New World Fans | Гайды',
-
-
+  async preFetch ({store}) {
+    if (store.state.data.guides.length === 0){
+       await store.dispatch('data/fetchGuides')
+    }
+  },
+    meta: {
+    title: 'New World гайды по классам и оружию на NW Fans',
     // meta tags
     meta: {
-      description: {name: 'Информационный сайт посвященный игре New World.' +
-          ' Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-      keywords: {name: 'keywords', content: 'Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-
-      // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+      description: {name: 'description', content: 'Гайды и обзоры классов и оружия New World для новичков и про игроков! Здесь вы найдете рапира гайд, танк гайд, копье гайд и многие другие! Только актуальные гайды по прокачке!'},
       ogTitle: {
         name: 'og:title',
-        // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `New World Fans | Гайды`
+          return `New World гайды по классам и оружию на NW Fans`
         }
       }
     }
   },
-
   data () {
     return {
-      categories:[]
-
     }
   },
-  async mounted() {
-    const response = await this.$api.get('/api/guide/guides')
-    this.categories = response.data
-
-  },
-  methods:{
-
-  },
+   computed:{
+    ...mapGetters('data',['guides']),
+   }
 
 }
 </script>

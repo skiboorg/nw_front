@@ -2,64 +2,40 @@
   <q-layout view="lHh Lpr lFf"  class="bg-dark text-grey-2">
 
     <q-header elevated  class="bg-dark q-py-md ">
-      <div class="container">
-        <q-toolbar class="flex items-center">
-          <q-toolbar-title >
-            <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap" to="/">
-              <p class="q-mb-none q-mr-xs">NW</p>
-              <img class="logo  q-mr-xs" src="~assets/logo.png" alt="">
-              <p class="q-mb-none">FANS</p>
-            </router-link>
-          </q-toolbar-title>
+      <q-toolbar class="flex items-center">
+        <q-toolbar-title >
+          <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap" to="/">
+            <p class="q-mb-none q-mr-xs">NW</p>
+            <img class="logo  q-mr-xs" src="~assets/logo.png" alt="">
+            <p class="q-mb-none">FANS</p>
+          </router-link>
+        </q-toolbar-title>
 
-          <q-tabs :breakpoint="1000" dense v-model="tab" indicator-color="primary" class="gt-sm">
+        <q-tabs :breakpoint="1000" dense v-model="tab" indicator-color="primary" class="gt-sm">
+          <q-route-tab name="news" label="Новости" to="/news"/>
+          <q-route-tab name="guilds" label="Компании" to="/companies"/>
 
-            <q-route-tab name="news" label="Новости" to="/news"/>
-            <q-route-tab name="guilds" label="Компании" to="/companies"/>
-            <q-btn-dropdown  auto-close stretch flat label="Информация">
-              <q-list class="bg-grey-9">
-                <q-item clickable>
-                  <q-item-section >
-                    <router-link  class="nav-link" to="/guides">Гайды</router-link>
-                  </q-item-section>
-                </q-item>
-                <q-separator/>
-                <q-item clickable>
-                  <q-item-section>
-                    <router-link class="nav-link" to="/faq">FAQ</router-link>
-                  </q-item-section>
-                </q-item>
-                <q-separator/>
-                <q-item clickable>
-                  <q-item-section>
-                    <router-link class="nav-link" to="/builds">Билды</router-link>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
-            <q-route-tab name="calc" label="Калькулятор (v0.5)" to="/skills"/>
-
-            <q-route-tab name="map" label="Карта" to="/map"/>
-<!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
+          <q-route-tab name="builds" label="Билды" to="/builds"/>
+          <q-route-tab name="calc" label="Калькулятор (v0.5)" to="/skills"/>
+          <q-route-tab name="guides" label="Гайды" to="/guides"/>
+          <q-route-tab name="map" label="Карта" to="/map"/>
+          <q-route-tab name="faq" label="FAQ" to="/faq"/>
+          <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
           <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
 
-          </q-tabs>
-          <q-btn
-            flat
-            dense
-            round
-            class="lt-md"
+        </q-tabs>
+        <q-btn
+          flat
+          dense
+          round
+          class="lt-md"
 
-            icon="menu"
-            aria-label="Menu"
-            @click="leftDrawerOpen = !leftDrawerOpen"
-          />
-        </q-toolbar>
-      </div>
-
-
+          icon="menu"
+          aria-label="Menu"
+          @click="leftDrawerOpen = !leftDrawerOpen"
+        />
+      </q-toolbar>
     </q-header>
-
     <q-drawer
       v-model="leftDrawerOpen"
       side="right"
@@ -102,22 +78,24 @@
             FAQ
           </q-item-section>
         </q-item>
-        <q-item clickable v-ripple >
+          <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/skills')">
             Калькулятор
           </q-item-section>
         </q-item>
+         <q-item clickable v-ripple >
+                  <q-item-section @click="$router.push('/builds')">
+                    Билды
+                  </q-item-section>
+                </q-item>
+
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/map')">
             Карта
           </q-item-section>
         </q-item>
-<!--        <q-item clickable v-ripple >-->
-<!--          <q-item-section @click="$router.push('/trade')">-->
-<!--            Биржа-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
-         <q-item clickable v-ripple >
+
+        <q-item clickable v-ripple >
           <q-item-section @click="feedbackModal = !feedbackModal">
             Обратная связь
           </q-item-section>
@@ -129,13 +107,13 @@
 
     </q-drawer>
     <q-page-container>
-<!--       <a v-if="showAd" class="block text-center" target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">-->
-<!--            <img src="~assets/izi.gif" alt="">-->
-<!--          </a>-->
+      <!--       <a v-if="showAd" class="block text-center" target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">-->
+      <!--            <img src="~assets/izi.gif" alt="">-->
+      <!--          </a>-->
       <router-view />
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
-            <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
-          </q-page-scroller>
+        <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
+      </q-page-scroller>
     </q-page-container>
     <footer class="q-pb-lg">
       <q-separator spaced="lg"/>
@@ -507,15 +485,15 @@ export default {
       this.is_loading = true
 
       await this.$api.post('/api/add_fb', {
-          fb_user: this.fb_user,
-          fb_text: this.fb_text
-        })
+        fb_user: this.fb_user,
+        fb_text: this.fb_text
+      })
       this.$q.notify({
-          message: 'Спасибо! :))',
-          position: this.$q.screen.lt.sm ? 'bottom' : 'bottom-right',
-          color: 'positive',
-          icon: 'announcement'
-        })
+        message: 'Спасибо! :))',
+        position: this.$q.screen.lt.sm ? 'bottom' : 'bottom-right',
+        color: 'positive',
+        icon: 'announcement'
+      })
       this.is_loading = false
       this.feedbackModal = false
     },

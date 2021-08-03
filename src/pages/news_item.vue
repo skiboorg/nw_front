@@ -4,7 +4,6 @@
       <template v-slot:media>
         <img :src="post.image" :alt="post.name">
       </template>
-
       <h1 class="text-white text-h3">{{post.name}}</h1>
     </q-parallax>
   <div class="container">
@@ -17,25 +16,23 @@
 
 
 
+import {mapGetters} from "vuex";
+
 export default {
-  name: 'MainLayout',
-  meta: {
-    // sets document title
-    title: `New World Fans | Новости игры`,
-
-
-    // meta tags
-    meta: {
-      description: {name: 'Информационный сайт посвященный игре New World.' +
-          ' Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-      keywords: {name: 'keywords', content: 'Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-
-      // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
-      ogTitle: {
-        name: 'og:title',
-        // optional; similar to titleTemplate, but allows templating with other meta properties
-        template(ogTitle) {
-          return `New World Fans | Новости игры`
+ async preFetch ({ store, currentRoute, redirect, ssrContext}) {
+    await store.dispatch('data/fetchPost',currentRoute.params.slug)
+    if (!store.state.data.post.name){
+      redirect({ path: '/404' })
+    }
+  },
+  meta() {
+    return {
+      title : `${this.title} |  New World Fans`,
+      meta: {
+        description: {name: 'description', content: this.description},
+        ogTitle: {
+          name: 'og:title',
+          content: `${this.title} |  New World Fans`
         }
       }
     }
@@ -43,20 +40,14 @@ export default {
 
   data () {
     return {
-      slide:'first',
-      autoplay:true,
-      post:{}
-
+      title: this.$store.state.data.post.name,
+      description: this.$store.state.data.post.description.substring(0,220).replace(/<[^>]*>?/gm, ''),
     }
   },
-  async mounted() {
-    const response_post = await this.$api.get(`/api/post/post?slug=${this.$route.params.slug}`)
-    this.post = response_post.data
+  computed: {
+    ...mapGetters('data',['post']),
+  }
 
-  },
-  methods:{
-
-  },
 
 }
 </script>

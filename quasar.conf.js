@@ -13,13 +13,12 @@ module.exports = function (/* ctx */) {
     supportTS: false,
 
     // https://v1.quasar.dev/quasar-cli/prefetch-feature
-    // preFetch: true,
+    preFetch: true,
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v1.quasar.dev/quasar-cli/boot-files
     boot: [
-
       'axios',
       'scroll',
       'init',
@@ -28,7 +27,7 @@ module.exports = function (/* ctx */) {
         path: 'map' // references /src/boot/<name>.js
       },
       {
-        server: false, // run on client-side only!
+        server: true, // run on client-side only!
         path: 'lodash' // references /src/boot/<name>.js
       },
       {

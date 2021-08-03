@@ -17,22 +17,28 @@
         v-for="(item,index) in banners"
         :name="index"
         :key="index"
-        :class="{'cursor-pointer':item.url}"
-        @click="item.url ? $router.push(item.url) : null"
         :img-src="item.image">
+        <router-link v-if="!item.is_url_for_site" :to="item.url">
         <div class="absolute-bottom custom-caption">
           <div class="text-h2 q-mb-lg">{{item.top_text}}</div>
           <div class="text-h5">{{item.bottom_text}}</div>
         </div>
+      </router-link>
+        <a v-else :href="item.url" target="_blank">
+          <div class="absolute-bottom custom-caption">
+          <div class="text-h2 q-mb-lg">{{item.top_text}}</div>
+          <div class="text-h5">{{item.bottom_text}}</div>
+        </div>
+        </a>
       </q-carousel-slide>
 
     </q-carousel>
     <div class="container">
       <div class="page-wrapper">
         <div class="page-left">
-<!--          <a target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">-->
-<!--            <img style="width: 100%; height: auto" src="~assets/izi.gif" alt="">-->
-<!--          </a>-->
+          <!--          <a target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">-->
+          <!--            <img style="width: 100%; height: auto" src="~assets/izi.gif" alt="">-->
+          <!--          </a>-->
 
           <div class="flex items-center ">
             <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
@@ -83,13 +89,13 @@
             </div>
           </router-link>
 
-<!--          <q-card dark   class="bg-grey-10 rs-card  cursor-pointer q-mb-md">-->
-<!--            <router-link  to="/companies/red-sky">-->
-<!--              <q-card-section  class="text-center q-pa-none">-->
-<!--               <q-img :ratio="16/9" src="~assets/rs.png"></q-img>-->
-<!--              </q-card-section>-->
-<!--            </router-link>-->
-<!--          </q-card>-->
+          <!--          <q-card dark   class="bg-grey-10 rs-card  cursor-pointer q-mb-md">-->
+          <!--            <router-link  to="/companies/red-sky">-->
+          <!--              <q-card-section  class="text-center q-pa-none">-->
+          <!--               <q-img :ratio="16/9" src="~assets/rs.png"></q-img>-->
+          <!--              </q-card-section>-->
+          <!--            </router-link>-->
+          <!--          </q-card>-->
 
           <CompanyCard
             v-if="guild.name_slug!=='red-sky'"
@@ -134,29 +140,22 @@ import NewsCard from "components/NewsCard";
 import CompanyCard from "components/CompanyCard";
 import BuildCard from "components/BuildCard";
 export default {
-  name: 'MainLayout',
-  components: {BuildCard, CompanyCard, NewsCard},
   meta: {
-    // sets document title
-    title: 'New World Fans | Главная',
-
-
+    title: 'New World mmorpg игра, фан сайт',
     // meta tags
     meta: {
-      description: {name: 'Информационный сайт посвященный игре New World.' +
-          ' Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-      keywords: {name: 'keywords', content: 'Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-
-      // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+      description: {name: 'description', content: 'Все о мире New World собрано на nwfans! Гайды, билды, компании, калькулятор билдов и многое другое! Заходи!'},
       ogTitle: {
         name: 'og:title',
-        // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `Информационный сайт посвященный игре New World`
+          return `New World mmorpg игра, фан сайт`
         }
       }
     }
   },
+  name: 'MainLayout',
+  components: {BuildCard, CompanyCard, NewsCard},
+
 
   data () {
     return {
@@ -173,6 +172,7 @@ export default {
     }
   },
   async mounted() {
+
     const response_posts = await this.$api.get('/api/post/posts?for=index')
     this.posts = response_posts.data
     const response_guilds = await this.$api.get('/api/guild/guilds?for=index')
@@ -216,10 +216,10 @@ export default {
     -webkit-box-shadow: 0 0 0 0 rgba(216,28,35, 0.4)
 
   70%
-      -webkit-box-shadow: 0 0 0 10px rgba(216,28,35, 0)
+    -webkit-box-shadow: 0 0 0 10px rgba(216,28,35, 0)
 
   100%
-      -webkit-box-shadow: 0 0 0 0 rgba(216,28,35, 0)
+    -webkit-box-shadow: 0 0 0 0 rgba(216,28,35, 0)
 
 
 @keyframes pulse
@@ -228,12 +228,12 @@ export default {
     box-shadow: 0 0 0 0 rgba(216,28,35, 0.4)
 
   70%
-      -moz-box-shadow: 0 0 0 10px rgba(216,28,35, 0)
-      box-shadow: 0 0 0 10px rgba(216,28,35, 0)
+    -moz-box-shadow: 0 0 0 10px rgba(216,28,35, 0)
+    box-shadow: 0 0 0 10px rgba(216,28,35, 0)
 
   100%
-      -moz-box-shadow: 0 0 0 0 rgba(216,28,35, 0)
-      box-shadow: 0 0 0 0 rgba(216,28,35, 0)
+    -moz-box-shadow: 0 0 0 0 rgba(216,28,35, 0)
+    box-shadow: 0 0 0 0 rgba(216,28,35, 0)
 
 
 </style>

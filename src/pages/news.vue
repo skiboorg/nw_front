@@ -1,19 +1,15 @@
 <template>
 <q-page >
  <div class="container">
-
           <div class="flex items-center q-py-lg">
             <q-icon size="30px" class="q-mr-md" color="primary" name="campaign" />
-            <h3 class="text-h5">Новости New World</h3>
+            <h1 class="text-h5">Новости New World</h1>
           </div>
-
           <NewsCard
             v-for="post in posts"
             :key="post.id"
             :post="post"
           />
-
-
     </div>
 </q-page>
 </template>
@@ -22,47 +18,36 @@
 
 
 import NewsCard from "components/NewsCard";
+import {mapGetters} from "vuex";
 export default {
   components: {NewsCard},
-  name: 'MainLayout',
+  async preFetch ({store}) {
+    if (store.state.data.posts.length === 0){
+       await store.dispatch('data/fetchPosts')
+    }
+  },
   meta: {
-    // sets document title
-    title: 'New World Fans | Новости игры',
-
-
-    // meta tags
+    title: 'New World Fans | Новости игры и последние обновления',
     meta: {
-      description: {name: 'Информационный сайт посвященный игре New World.' +
-          ' Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-      keywords: {name: 'keywords', content: 'Калькулятор билдов, описание скилов, интерактивная карта, биржа игровой валюты'},
-
-      // note: for Open Graph type metadata you will need to use SSR, to ensure page is rendered by the server
+      description: {name: 'description', content: 'Узнай самые свежие новости и гайды New World, пользуйся самым актуальным ' +
+          'калькулятором умений New World, получай лафхаки NW на New World Fans'},
       ogTitle: {
         name: 'og:title',
-        // optional; similar to titleTemplate, but allows templating with other meta properties
         template(ogTitle) {
-          return `New World Fans | Новости игры`
+          return `New World Fans | Новости игры и последние обновления`
         }
       }
     }
   },
-
   data () {
     return {
-      slide:'first',
-      autoplay:true,
-      posts:[]
-
     }
   },
-  async mounted() {
-    const response_posts = await this.$api.get('/api/post/posts?for=all')
-    this.posts = response_posts.data
+  computed: {
+    ...mapGetters('data', ['posts']),
+  }
 
-  },
-  methods:{
 
-  },
 
 }
 </script>

@@ -111,7 +111,7 @@
       <!--            <img src="~assets/izi.gif" alt="">-->
       <!--          </a>-->
       <router-view />
-      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
+      <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[20, 90]">
         <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
       </q-page-scroller>
     </q-page-container>
@@ -128,7 +128,21 @@
             <p class="q-mb-none">Информационный сайт посвященный игре New World</p>
           </div>
 
-          <p class="q-mb-none">Сайт никак не связан с Amazon Game Studios</p>
+          <div class="flex items-center">
+            <a class="icon q-mr-md" href="https://vk.com/nwfansru" target="_blank">
+              <img src="~assets/vk.svg" alt="">
+            </a>
+            <a class="icon q-mr-md" href="https://t.me/nwfansru" target="_blank">
+              <img src="~assets/t.svg" alt="">
+            </a>
+            <a class="icon" href="https://www.instagram.com/nwfansru/" target="_blank">
+              <img src="~assets/inst.svg" alt="">
+            </a>
+
+          </div>
+
+
+
         </div>
       </div>
     </footer>
@@ -584,6 +598,16 @@ export default {
 }
 </script>
 <style lang="sass">
+.icon
+  display: inline-flex
+  border: 2px solid $primary
+  align-items: center
+  justify-content: center
+  padding: 5px
+  border-radius: 5px
+  img
+    width: 30px
+    height: 30px
 .logo
   width: 30px
   height: 30px

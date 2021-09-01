@@ -13,24 +13,27 @@
       height="500px"
       class="q-mb-lg bg-dark"
     >
-      <q-carousel-slide
+
+         <q-carousel-slide
         v-for="(item,index) in banners"
         :name="index"
         :key="index"
         :img-src="item.image">
         <router-link v-if="!item.is_url_for_site" :to="item.url">
         <div class="absolute-bottom custom-caption">
-          <div class="text-h2 q-mb-lg">{{item.top_text}}</div>
-          <div class="text-h5">{{item.bottom_text}}</div>
+          <div v-if="item.top_text" :class="{'q-mb-lg':item.bottom_text}" class="text-h2 ">{{item.top_text}}</div>
+          <div v-if="item.bottom_text" class="text-h5">{{item.bottom_text}}</div>
         </div>
       </router-link>
         <a v-else :href="item.url" target="_blank">
           <div class="absolute-bottom custom-caption">
-          <div class="text-h2 q-mb-lg">{{item.top_text}}</div>
-          <div class="text-h5">{{item.bottom_text}}</div>
+          <div v-if="item.top_text" :class="{'q-mb-lg':item.bottom_text}" class="text-h2 ">{{item.top_text}}</div>
+          <div v-if="item.bottom_text" class="text-h5">{{item.bottom_text}}</div>
         </div>
         </a>
       </q-carousel-slide>
+
+
 
     </q-carousel>
     <div class="container">

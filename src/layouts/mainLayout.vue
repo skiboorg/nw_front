@@ -11,12 +11,13 @@
           </router-link>
         </q-toolbar-title>
 
-        <q-tabs :breakpoint="1000" dense v-model="tab" indicator-color="primary" class="gt-sm">
+        <q-tabs :breakpoint="1600" dense v-model="tab" indicator-color="primary" class="gt-sm">
           <q-route-tab name="news" label="Новости" to="/news"/>
           <q-route-tab name="guilds" label="Компании" to="/companies"/>
 
           <q-route-tab name="builds" label="Билды" to="/builds"/>
           <q-route-tab name="calc" label="Калькулятор (v0.5)" to="/skills"/>
+          <q-route-tab name="db" label="База данных" to="/database/all"/>
           <q-route-tab name="guides" label="Гайды" to="/guides"/>
           <q-route-tab name="map" label="Карта" to="/map"/>
           <q-route-tab name="faq" label="FAQ" to="/faq"/>

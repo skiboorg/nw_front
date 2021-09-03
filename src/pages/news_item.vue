@@ -1,12 +1,12 @@
 <template>
 <q-page >
-   <q-parallax :height="300" :speed="1" class="q-mb-lg">
+   <q-parallax :height="400" :speed="1" class="q-mb-lg">
       <template v-slot:media>
         <img :src="post.image" :alt="post.name">
       </template>
-      <h1 class="text-white text-h3">{{post.name}}</h1>
     </q-parallax>
   <div class="container">
+    <h1 class="text-white text-h4">{{post.name}}</h1>
     <div class="post-content" v-html="post.description"></div>
   </div>
 </q-page>

@@ -11,6 +11,11 @@ const state = () => ({
   build:{},
   poi:[],
   resourses:[],
+  faq:[],
+  item_categories:[],
+  items:[],
+  item:{}
+
 
 })
 
@@ -71,11 +76,45 @@ const mutations = {
 
       //state.resourses = data
     },
-
+  updateFaq(state,data){
+    state.faq = data
+  },
+  updateItemCategories(state,data){
+    state.item_categories = data
+  },
+  updateItems(state,data){
+    state.items = data
+  },
+  updateItem(state,data){
+    state.item = data
+  },
 
 }
 
 const actions = {
+  async fetchItems({commit},data){
+    if (data.type==='all'){
+      const response = await api.get(`api/item/items?type=a${data.page?'&page='+data.page :''}`)
+      commit('updateItems', response.data)
+    }
+    if (data.type==='s'){
+      const response = await api.get(`api/item/items?type=s&s=${data.slug}${data.page?'&page='+data.page :''}`)
+      commit('updateItems', response.data)
+    }
+
+  },
+  async fetchItem({commit},data){
+    const response = await api.get(`/api/item/item?slug=${data}`)
+    commit('updateItem', response.data)
+  },
+  async fetchFaq({commit}){
+    const response = await api.get('/api/faq')
+    commit('updateFaq', response.data)
+  },
+  async fetchItemCategories({commit}){
+    const response = await api.get('/api/item/category')
+    commit('updateItemCategories', response.data)
+  },
 
   async fetchGuilds({commit}){
     const response = await api.get('/api/guild/guilds?for=all')
@@ -140,6 +179,10 @@ export const getters = {
   build: (state) => state.build,
   pois: (state) => state.poi,
   categoryTypes: (state) => state.resourses,
+  faq: (state) => state.faq,
+  item_categories: (state) => state.item_categories,
+  items: (state) => state.items,
+  item: (state) => state.item,
 
 
 }

@@ -14,6 +14,7 @@ export default async ({ app, router, Vue, store, ssrContext }) => {
      //   store.dispatch('auth/connectWS', store.state.auth.user.id)
      // }
   }
+  store.dispatch('data/fetchItemCategories')
 
   Vue.prototype.$user = store.state.auth
   console.info('boot: init exited')

@@ -26,6 +26,16 @@ const routes = [
     ]
   },
   {
+    path: '/database',
+    component: () => import('layouts/dbLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/database/index.vue') },
+      { path: ':category_slug', component: () => import('pages/database/index.vue') },
+      { path: ':category_slug/:subcategory_slug', component: () => import('pages/database/index.vue') },
+      { path: ':category_slug/:subcategory_slug/:item_slug', component: () => import('pages/database/item.vue') }
+    ]
+  },
+  {
     path: '/dkp',
     component: () => import('layouts/dkpLayout.vue'),
     children: [

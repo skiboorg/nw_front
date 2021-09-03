@@ -8,13 +8,13 @@
     <q-list dark padding  class="rounded-borders" style="max-width: 100%">
       <q-expansion-item
         group="somegroup"
-        v-for="faq in faqs"
-        :key="faq.id"
-        :label="faq.question"
+        v-for="faq_item in faq"
+        :key="faq_item.id"
+        :label="faq_item.question"
         class="text-h6 text-primary"
       >
         <q-card class="bg-grey-9">
-          <q-card-section class="text-white" v-html="faq.answer">
+          <q-card-section class="text-white" v-html="faq_item.answer">
 
           </q-card-section>
         </q-card>
@@ -30,8 +30,14 @@
 
 
 
+import {mapGetters} from "vuex";
+
 export default {
-  name: 'MainLayout',
+  async preFetch ({store}) {
+    if (store.state.data.faq.length === 0){
+       await store.dispatch('data/fetchFaq')
+    }
+  },
    meta: {
     title: 'New World FAQ',
     // meta tags
@@ -48,16 +54,13 @@ export default {
 
   data () {
     return {
-      faqs:[]
+
     }
   },
-  async mounted() {
-    const response = await this.$api.get('/api/faq')
-    this.faqs = response.data
-  },
-  methods:{
 
-  },
+  computed:{
+    ...mapGetters('data',['faq']),
+   }
 }
 </script>
 <style lang="sass" scoped>

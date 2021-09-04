@@ -11,15 +11,15 @@
           <q-item-label class="text-bold" :class="`item-color-rarity-${item.rarity}`">{{item.name}}</q-item-label>
           <q-item-label v-if="item.can_be_crafted" caption class="text-positive">Можно скрафтить</q-item-label>
         </q-item-section>
-        <q-item-section>
+        <q-item-section class="gt-sm">
           <div class="flex items-center q-gutter-sm"  >
             <img :src="perk.icon" class="perk-img" alt="" v-for="perk in item.perks" :key="perk.id">
 
           </div>
         </q-item-section>
-       <q-item-section side class="text-bold">{{item.rarity | rarity}}</q-item-section>
-        <q-item-section side class="text-bold">{{item.tier | tier}}</q-item-section>
-        <q-item-section side class="text-bold">{{item.gearScore}}</q-item-section>
+       <q-item-section side class="text-bold gt-sm">{{item.rarity | rarity}}</q-item-section>
+        <q-item-section side class="text-bold gt-sm">{{item.tier | tier}}</q-item-section>
+        <q-item-section side class="text-bold gt-sm">{{item.gearScore}}</q-item-section>
       </q-item>
     </q-list>
 
@@ -37,58 +37,43 @@
       boundary-numbers
     />
         </q-card-section>
-
       </q-card>
-
     </div>
-
-
-
   </q-page>
-
-
 </template>
 <script>
 
 
 
 import {mapGetters,mapActions} from "vuex";
-
 export default {
   async preFetch ({store,currentRoute}) {
-
-
     if (currentRoute.params.subcategory_slug){
-       await store.dispatch('data/fetchItems',{type:'s',slug:currentRoute.params.subcategory_slug})
+       await store.dispatch('data/fetchItems',{
+         type:'s',
+         cat_slug:currentRoute.params.category_slug,
+         subcat_slug:currentRoute.params.subcategory_slug})
     }else {
-       console.log('no')
       await store.dispatch('data/fetchItems',{type:'all'})
     }
-
-
   },
-   meta: {
-    title: 'New World База данных',
-    // meta tags
-    meta: {
-      description: {name: 'description', content: 'База данных по игре New World'},
-      ogTitle: {
-        name: 'og:title',
-        template(ogTitle) {
-          return `New World База данных`
+    meta() {
+    return {
+      title : this.title,
+      meta: {
+        description: {name: 'description', content: this.description},
+        ogTitle: {
+          name: 'og:title',
+          content: this.title
         }
       }
     }
   },
-
   data () {
     return {
       current:1,
-      last_subcat:this.$route.params.subcategory_slug
+      last_subcat:this.$route.params.subcategory_slug,
     }
-  },
-  async mounted() {
-
   },
   filters:{
     tier(val){
@@ -134,6 +119,7 @@ export default {
     }
   },
 
+
   // beforeRouteUpdate(){
   //   console.log('update')
   // },
@@ -141,7 +127,11 @@ export default {
     ...mapActions('data',['fetchItems']),
     changePage(){
       if (this.$route.params.subcategory_slug){
-       this.fetchItems({type:'s',slug:this.$route.params.subcategory_slug,page:this.current})
+       this.fetchItems({
+         type:'s',
+         cat_slug:this.$route.params.category_slug,
+         subcat_slug:this.$route.params.subcategory_slug,
+         page:this.current})
     }else {
       this.fetchItems({type:'all',page:this.current})
     }
@@ -150,7 +140,7 @@ export default {
 
   },
   computed:{
-    ...mapGetters('data',['items']),
+    ...mapGetters('data',['items','title','description']),
    }
 }
 </script>

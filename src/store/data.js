@@ -14,7 +14,9 @@ const state = () => ({
   faq:[],
   item_categories:[],
   items:[],
-  item:{}
+  item:{},
+  title:'',
+  description:''
 
 
 })
@@ -83,29 +85,62 @@ const mutations = {
     state.item_categories = data
   },
   updateItems(state,data){
-    state.items = data
+    state.items = data.items
+    state.title = data.title
+    state.description = data.description
   },
   updateItem(state,data){
-    state.item = data
+    state.item = data.item
+    state.title = data.title
+    state.description = data.description
   },
 
 }
 
 const actions = {
-  async fetchItems({commit},data){
+  async fetchItems({commit,getters},data){
     if (data.type==='all'){
       const response = await api.get(`api/item/items?type=a${data.page?'&page='+data.page :''}`)
-      commit('updateItems', response.data)
+      let title = 'New World все предметы'
+      let description = 'Смотри обзор всех предметов в New World на NWfans. Все виды оружие, информация о крафте, легендарности. Заходи!'
+      commit('updateItems', {items:response.data,title,description})
     }
     if (data.type==='s'){
-      const response = await api.get(`api/item/items?type=s&s=${data.slug}${data.page?'&page='+data.page :''}`)
-      commit('updateItems', response.data)
+      const response = await api.get(`api/item/items?type=s&s=${data.subcat_slug}${data.page?'&page='+data.page :''}`)
+      let cat = getters.item_categories.find(x=>x.name_slug === data.cat_slug)
+      let subcat = cat.subcategories.find(x=>x.name_slug===data.subcat_slug)
+      let title = `New World ${cat.name.toLowerCase()} ${subcat.name.toLowerCase()}`
+      let description = `Смотри обзор ${cat.name.toLowerCase()} ${subcat.name.toLowerCase()} в New World на NWfans. Все виды ${cat.name.toLowerCase()}, информация о крафте, легендарности. Заходи!`
+      commit('updateItems', {items:response.data,title,description})
     }
 
   },
   async fetchItem({commit},data){
     const response = await api.get(`/api/item/item?slug=${data}`)
-    commit('updateItem', response.data)
+    let rar
+    let item = response.data
+    if (item.rarity===0){
+        rar =  'Обычный'
+      }
+      if (item.rarity===1){
+        rar =  'Необычный'
+      }
+      if (item.rarity===2){
+        rar =  'Редкий'
+      }
+      if (item.rarity===3){
+        rar =  'Эпический'
+      }
+      if (item.rarity===4){
+        rar =  'Легендарный'
+      }
+
+
+
+
+    let title=`${item.name} ${item.subcategory.name} New World Fans`
+    let description=`${rar}, Тир ${item.tier}, Gear Score (min) ${item.gearScoreMin} Gear Score (max) ${item.gearScoreMax}, вес ${item.weight/10} ${item.name}. Эти и остальные свойства на New World Fans, заходи!`
+    commit('updateItem', {item,title,description})
   },
   async fetchFaq({commit}){
     const response = await api.get('/api/faq')
@@ -183,6 +218,8 @@ export const getters = {
   item_categories: (state) => state.item_categories,
   items: (state) => state.items,
   item: (state) => state.item,
+  title: (state) => state.title,
+  description: (state) => state.description,
 
 
 }

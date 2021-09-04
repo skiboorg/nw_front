@@ -71,12 +71,12 @@ export default {
   },
    meta() {
     return {
-      title : `New World Fans | ${this.title}`,
+      title : this.title,
       meta: {
         description: {name: 'description', content: this.description},
         ogTitle: {
           name: 'og:title',
-          content: `New World Fans | ${this.title}`
+          content: this.title
         }
       }
     }
@@ -84,10 +84,10 @@ export default {
 
   data () {
     return {
-      title: this.$store.state.data.item.name,
-      description: 'description',
+
     }
   },
+
   filters:{
     attr(val){
       if(val==='con'){
@@ -167,7 +167,7 @@ export default {
   },
 
   computed:{
-    ...mapGetters('data',['item']),
+    ...mapGetters('data',['item','title','description']),
    }
 }
 </script>

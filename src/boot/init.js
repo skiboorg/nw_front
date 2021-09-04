@@ -1,7 +1,7 @@
 import {Cookies, LocalStorage} from 'quasar'
 
 export default async ({ app, router, Vue, store, ssrContext }) => {
-  console.info('boot: init entered', store)
+ // console.info('boot: init entered', store)
   const cookies = process.env.SERVER
     ? Cookies.parseSSR(ssrContext)
     : Cookies

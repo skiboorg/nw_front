@@ -89,6 +89,11 @@
                     Билды
                   </q-item-section>
                 </q-item>
+        <q-item clickable v-ripple >
+                  <q-item-section @click="$router.push('/database/all')">
+                     База данных
+                  </q-item-section>
+                </q-item>
 
         <q-item clickable v-ripple >
           <q-item-section @click="$router.push('/map')">

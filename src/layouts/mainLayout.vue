@@ -17,9 +17,9 @@
 
           <q-route-tab name="builds" label="Билды" to="/builds"/>
           <q-route-tab name="calc" label="Калькулятор (v0.5)" to="/skills"/>
-          <q-route-tab name="db" label="База данных" to="/database/all"/>
+          <q-route-tab name="db" label="База предметов" to="/database/all"/>
           <q-route-tab name="guides" label="Гайды" to="/guides"/>
-<!--          <q-route-tab name="map" label="Карта" to="/map"/>-->
+          <q-route-tab name="map" label="Карта" to="/map"/>
           <q-route-tab name="faq" label="FAQ" to="/faq"/>
           <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
           <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
@@ -91,15 +91,15 @@
                 </q-item>
         <q-item clickable v-ripple >
                   <q-item-section @click="$router.push('/database/all')">
-                     База данных
+                     База предметов
                   </q-item-section>
                 </q-item>
 
-<!--        <q-item clickable v-ripple >-->
-<!--          <q-item-section @click="$router.push('/map')">-->
-<!--            Карта-->
-<!--          </q-item-section>-->
-<!--        </q-item>-->
+        <q-item clickable v-ripple >
+          <q-item-section @click="$router.push('/map')">
+            Карта
+          </q-item-section>
+        </q-item>
 
         <q-item clickable v-ripple >
           <q-item-section @click="feedbackModal = !feedbackModal">

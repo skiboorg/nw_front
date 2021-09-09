@@ -101,8 +101,8 @@ const actions = {
   async fetchItems({commit,getters},data){
     if (data.type==='all'){
       const response = await api.get(`api/item/items?type=a${data.page?'&page='+data.page :''}`)
-      let title = 'New World все предметы'
-      let description = 'Смотри обзор всех предметов в New World на NWfans. Все виды оружие, информация о крафте, легендарности. Заходи!'
+      let title = 'Предметы в New World, база данных NW'
+      let description = 'Посмотри все доступные в New World предметы в базе знаний на New World Fans. Все виды оружие, информация о крафте, легендарности. Заходи!'
       commit('updateItems', {items:response.data,title,description})
     }
     if (data.type==='s'){

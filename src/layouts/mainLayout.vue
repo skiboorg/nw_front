@@ -116,6 +116,23 @@
       <!--       <a v-if="showAd" class="block text-center" target="_blank" href="https://izi.ru/new-world/currency/sell?utm_source=nwfans&utm_medium=banner&utm_campaign=1">-->
       <!--            <img src="~assets/izi.gif" alt="">-->
       <!--          </a>-->
+      <div class="container">
+         <div class="flex items-center justify-between q-pt-lg">
+          <div class="">
+             <a href="https://vk.com/wall-206178035_50" target="_blank">
+            <img style="max-width: 100%;height: auto" src="~assets/b1.png" alt="">
+          </a>
+          </div>
+          <div class="">
+             <a href="https://t.me/nwfansru/46" target="_blank">
+            <img style="max-width: 100%;height: auto" src="~assets/b2.png" alt="">
+          </a>
+          </div>
+
+
+        </div>
+      </div>
+
       <router-view />
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[20, 90]">
         <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />

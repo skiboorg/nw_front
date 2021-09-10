@@ -1,41 +1,41 @@
 <template>
   <q-page>
-    <q-carousel
-      arrows
-      animated
-      v-model="slide"
-      :autoplay="autoplay"
-      infinite
-      transition-prev="slide-right"
-      transition-next="slide-left"
-      @mouseenter="autoplay = false"
-      @mouseleave="autoplay = true"
-      height="500px"
-      class="q-mb-lg bg-dark"
-    >
+<!--    <q-carousel-->
+<!--      arrows-->
+<!--      animated-->
+<!--      v-model="slide"-->
+<!--      :autoplay="autoplay"-->
+<!--      infinite-->
+<!--      transition-prev="slide-right"-->
+<!--      transition-next="slide-left"-->
+<!--      @mouseenter="autoplay = false"-->
+<!--      @mouseleave="autoplay = true"-->
+<!--      height="500px"-->
+<!--      class="q-mb-lg bg-dark"-->
+<!--    >-->
 
-         <q-carousel-slide
-        v-for="(item,index) in banners"
-        :name="index"
-        :key="index"
-        :img-src="item.image">
-        <router-link v-if="!item.is_url_for_site" :to="item.url">
-        <div class="absolute-bottom custom-caption">
-          <div v-if="item.top_text" :class="{'q-mb-lg':item.bottom_text}" class="text-h2 ">{{item.top_text}}</div>
-          <div v-if="item.bottom_text" class="text-h5">{{item.bottom_text}}</div>
-        </div>
-      </router-link>
-        <a v-else :href="item.url" target="_blank">
-          <div class="absolute-bottom custom-caption">
-          <div v-if="item.top_text" :class="{'q-mb-lg':item.bottom_text}" class="text-h2 ">{{item.top_text}}</div>
-          <div v-if="item.bottom_text" class="text-h5">{{item.bottom_text}}</div>
-        </div>
-        </a>
-      </q-carousel-slide>
+<!--         <q-carousel-slide-->
+<!--        v-for="(item,index) in banners"-->
+<!--        :name="index"-->
+<!--        :key="index"-->
+<!--        :img-src="item.image">-->
+<!--        <router-link v-if="!item.is_url_for_site" :to="item.url">-->
+<!--        <div class="absolute-bottom custom-caption">-->
+<!--          <div v-if="item.top_text" :class="{'q-mb-lg':item.bottom_text}" class="text-h2 ">{{item.top_text}}</div>-->
+<!--          <div v-if="item.bottom_text" class="text-h5">{{item.bottom_text}}</div>-->
+<!--        </div>-->
+<!--      </router-link>-->
+<!--        <a v-else :href="item.url" target="_blank">-->
+<!--          <div class="absolute-bottom custom-caption">-->
+<!--          <div v-if="item.top_text" :class="{'q-mb-lg':item.bottom_text}" class="text-h2 ">{{item.top_text}}</div>-->
+<!--          <div v-if="item.bottom_text" class="text-h5">{{item.bottom_text}}</div>-->
+<!--        </div>-->
+<!--        </a>-->
+<!--      </q-carousel-slide>-->
 
 
 
-    </q-carousel>
+<!--    </q-carousel>-->
     <div class="container">
       <div class="page-wrapper">
         <div class="page-left">

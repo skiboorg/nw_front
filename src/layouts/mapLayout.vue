@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="bg-dark">
-     <q-header elevated  class="bg-dark q-py-md ">
+   <q-header elevated  class="bg-dark q-py-md ">
       <q-toolbar class="flex items-center">
         <q-toolbar-title >
           <router-link style="text-decoration: none;color: #fff" class="flex items-center no-wrap" to="/">
@@ -10,17 +10,18 @@
           </router-link>
         </q-toolbar-title>
 
-        <q-tabs :breakpoint="1000" dense v-model="tab" indicator-color="primary" class="gt-sm">
+        <q-tabs style="max-width: 85%" :breakpoint="1600" dense :shrink="false" v-model="tab" indicator-color="primary" class="gt-sm">
           <q-route-tab name="news" label="Новости" to="/news"/>
           <q-route-tab name="guilds" label="Компании" to="/companies"/>
 
           <q-route-tab name="builds" label="Билды" to="/builds"/>
-          <q-route-tab name="calc" label="Калькулятор (v0.5)" to="/skills"/>
+          <q-route-tab name="calc" label="Калькулятор" to="/skills"/>
+          <q-route-tab name="db" label="База предметов" to="/database/all"/>
           <q-route-tab name="guides" label="Гайды" to="/guides"/>
           <q-route-tab name="map" label="Карта" to="/map"/>
           <q-route-tab name="faq" label="FAQ" to="/faq"/>
           <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
-<!--          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>-->
+          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
 
         </q-tabs>
         <q-btn
@@ -85,6 +86,11 @@
          <q-item clickable v-ripple >
                   <q-item-section @click="$router.push('/builds')">
                     Билды
+                  </q-item-section>
+                </q-item>
+        <q-item clickable v-ripple >
+                  <q-item-section @click="$router.push('/database/all')">
+                     База предметов
                   </q-item-section>
                 </q-item>
 

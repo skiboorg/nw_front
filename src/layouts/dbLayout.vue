@@ -115,15 +115,15 @@
     <q-page-container>
       <div class="container">
         <div class="flex items-center justify-between q-pt-lg">
-          <div class="">
-             <a href="https://vk.com/wall-206178035_50" target="_blank">
-            <img style="max-width: 100%;height: auto" src="~assets/b1.png" alt="">
-          </a>
+          <div class="social-banner q-mb-md">
+            <p class="q-mb-none q-mr-md ">Получи лицензию NW</p>
+                <a class="q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active" href="https://vk.com/wall-206178035_50" target="_blank">Подписаться в ВК</a>
+
           </div>
-          <div class="">
-             <a href="https://t.me/nwfansru/46" target="_blank">
-            <img style="max-width: 100%;height: auto" src="~assets/b2.png" alt="">
-          </a>
+           <div class="social-banner q-mb-md">
+            <p class="q-mb-none q-mr-md ">Розыгрыш лицензии NW</p>
+                <a class=" q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active" href="https://t.me/nwfansru/46" target="_blank">Подписаться в ТГ</a>
+
           </div>
 
 

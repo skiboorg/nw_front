@@ -21,7 +21,7 @@
           <q-route-tab name="map" label="Карта" to="/map"/>
           <q-route-tab name="faq" label="FAQ" to="/faq"/>
           <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
-          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
+<!--          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>-->
 
         </q-tabs>
         <q-btn

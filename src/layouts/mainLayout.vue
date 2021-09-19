@@ -22,7 +22,7 @@
           <q-route-tab name="map" label="Карта" to="/map"/>
           <q-route-tab name="faq" label="FAQ" to="/faq"/>
           <!--            <q-route-tab name="trade" label="Биржа" to="/trade"/>-->
-          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>
+<!--          <q-btn @click="feedbackModal = !feedbackModal" color="dark" text-color="primary" label="Обратная связь"/>-->
 
         </q-tabs>
         <q-btn
@@ -119,12 +119,20 @@
       <div class="container">
          <div class="flex items-center justify-between q-pt-lg">
           <div class="social-banner q-mb-md">
-            <p class="q-mb-none q-mr-md ">Получи лицензию NW</p>
+            <p class="q-mb-md-none q-mb-sm q-mr-md ">Получи лицензию NW</p>
                 <a class="q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active" href="https://vk.com/wall-206178035_50" target="_blank">Подписаться в ВК</a>
 
           </div>
+             <div class="social-banner q-mb-md">
+            <p class="q-mb-none q-mr-md ">Наш Discord</p>
+                <a class="q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline
+                 q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable
+                 q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active"
+                   href="https://discord.gg/K6uSpssV96" target="_blank">Присоединяйся</a>
+
+          </div>
            <div class="social-banner q-mb-md">
-            <p class="q-mb-none q-mr-md ">Розыгрыш лицензии NW</p>
+            <p class="q-mb-md-none q-mb-sm q-mr-md ">Розыгрыш лицензии NW</p>
                 <a class=" q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active" href="https://t.me/nwfansru/46" target="_blank">Подписаться в ТГ</a>
 
           </div>

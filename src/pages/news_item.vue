@@ -1,5 +1,5 @@
 <template>
-<q-page >
+<q-page>
    <q-parallax :height="400" :speed="1" class="q-mb-lg">
       <template v-slot:media>
         <img :src="post.image" :alt="post.name">
@@ -7,6 +7,7 @@
     </q-parallax>
   <div class="container">
     <h1 class="text-white text-h4">{{post.name}}</h1>
+
     <div class="post-content" v-html="post.description"></div>
   </div>
 </q-page>
@@ -61,4 +62,5 @@ export default {
   img
     max-width: 100% !important
     height: auto !important
+
 </style>

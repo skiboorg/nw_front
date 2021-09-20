@@ -1,40 +1,32 @@
 <template>
   <q-page >
     <div class="container">
+      <q-breadcrumbs>
+      <q-breadcrumbs-el to="/" label="Главная" />
+      <q-breadcrumbs-el to="/guides" label="Гайды" />
+      <q-breadcrumbs-el :label="title" />
+    </q-breadcrumbs>
 
-      <div class="flex items-center  q-py-lg">
+      <div class="flex items-center  q-pt-mg q-pb-lg">
         <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
-        <h1 class="text-h5">Гайды New World</h1>
+        <h1 class="text-h5">{{title}}</h1>
       </div>
-      <div class="q-gutter-md">
-        <q-btn color="primary" @click="$scrollTo(`#cat_${category.id}`, 200, {offset: -90})" text-color="dark" :label="category.name" v-for="category in guides" :key="category.id"/>
-      </div>
-      <div :id="`cat_${category.id}`" class="" v-for="category in guides" :key="category.id">
-        <h3 class="text-h5 text-primary text-bold">{{category.name}}</h3>
-        <q-separator spaced="lg"/>
+
+
         <div class="companies-grid">
-          <div v-for="(guide,index) in category.guides">
+
             <GuideCard
-              v-if="index<=4"
+              v-for="(guide,index) in guides.find(x=>x.name_slug===$route.params.category_slug).guides"
               :key="guide.id"
-              :category="category.name_slug"
+              :category="$route.params.category_slug"
               :item = "guide"
             />
-            <q-card dark class="full-height " v-if="index===5">
-              <router-link :to="`/guides/${category.name_slug}`">
-                 <q-card-section class="full-height flex column items-center justify-center">
 
-                <p class="text-primary text-bold flex items-center text-body1">Читать все гайды <q-icon class="q-ml-sm" name="double_arrow"/> </p>
-                <p class="text-primary text-bold text-body2">{{category.name}}</p>
-              </q-card-section>
-              </router-link>
 
-            </q-card>
 
-          </div>
 
         </div>
-      </div>
+
 
 
     </div>
@@ -50,13 +42,18 @@ import GuideCard from "components/GuideCard";
 import {mapGetters} from "vuex";
 export default {
   components: {GuideCard},
-  async preFetch ({store}) {
+  async preFetch ({store,currentRoute, redirect}) {
     if (store.state.data.guides.length === 0){
       await store.dispatch('data/fetchGuides')
     }
+    if (store.state.data.guides.filter(x=>x.name_slug===currentRoute.params.category_slug).length===0 ){
+      redirect({ path: '/404' })
+    }
+
   },
-  meta: {
-    title: 'New World гайды по классам и оружию на NW Fans',
+  meta() {
+    return{
+       title: `New World гайды ${this.title}`,
     // meta tags
     meta: {
       description: {name: 'description', content: 'Гайды и обзоры классов и оружия New World для новичков и про игроков! Здесь вы найдете рапира гайд, танк гайд, копье гайд и многие другие! Только актуальные гайды по прокачке!'},
@@ -67,9 +64,12 @@ export default {
         }
       }
     }
+    }
+
   },
   data () {
     return {
+      title: this.$store.state.data.guides.find(x=>x.name_slug===this.$route.params.category_slug).name
     }
   },
   computed:{

@@ -9,11 +9,13 @@
         :ratio="$q.screen.lt.md ? 4/3 : 16/9"
         :src="post.image"
       />
-      <q-card-section class="flex column">
+      <q-card-section class="full-width">
         <h3 class="text-h6">{{post.name}}</h3>
+        <q-scroll-area style="height: 65px; width: 100%">
         <p>
           {{post.short_description}}
         </p>
+        </q-scroll-area>
         <q-space/>
         <q-separator color="primary" spaced="lg"/>
         <div class="flex justify-between items-center">

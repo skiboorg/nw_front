@@ -5,22 +5,28 @@
 <!--      -->
       <q-img :ratio="16/9" :src="`https://img.youtube.com/vi/${item.video_link}/maxresdefault.jpg`"/>
       <q-card-section>
-        <div class="text-h6">{{item.name}}</div>
+        <div class="text-h6 title">{{item.name}}</div>
       </q-card-section>
       <q-card-section class="q-pt-none">
+        <q-scroll-area style="height: 100px;">
         {{item.video_description}}
+        </q-scroll-area>
       </q-card-section>
     </div>
     <div v-else class="cursor-pointer">
-      <router-link :to="`/guides/${item.name_slug}`">
+      <router-link :to="`/guides/${category}/${item.name_slug}`">
         <q-img :ratio="16/9" :src="item.image" :alt="item.short_description"/>
 
       <q-card-section>
-        <div class="text-h6">{{item.name}}</div>
+        <div class="text-h6 title">{{item.name}}</div>
       </q-card-section>
 
       <q-card-section class="q-pt-none">
-        {{item.short_description}}...
+        <q-scroll-area style="height: 100px;">
+          <p> {{item.short_description}}...</p>
+
+    </q-scroll-area>
+
       </q-card-section>
       </router-link>
 
@@ -47,7 +53,7 @@
 </template>
 <script>
 export default {
-  props:['item'],
+  props:['item','category'],
   data () {
     return {
       videoModal:false,
@@ -57,3 +63,7 @@ export default {
   }
 }
 </script>
+<style lang="sass">
+.title
+  min-height: 65px
+</style>

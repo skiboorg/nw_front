@@ -97,7 +97,7 @@
 
 
       </q-tab-panels>
-    <div class="mobile-description" v-if="is_hover">
+    <div class="mobile-description" v-if="is_hover && $q.screen.lt.sm">
       <p class="text-center text-caption text-bold">{{name}}</p>
       <p  class="text-center text-caption">{{description}}</p>
     </div>

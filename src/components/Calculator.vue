@@ -1,5 +1,6 @@
 <template>
-   <q-tab-panels v-model="panel" animated class="bg-dark">
+  <div class="relative-position">
+    <q-tab-panels v-model="panel" animated class="bg-dark">
 
         <q-tab-panel name="choose">
 
@@ -46,7 +47,8 @@
 
               <div :ref="`row${row_index+1}tree${tree_index}`" class="skill-tree__row " v-for="(row,row_index) in 6">
                 <div v-if="!item.is_empty"
-                     @mouseenter="is_hover=true"
+                     @mouseenter="is_hover=!is_hover, name=item.name_en, description=item.description"
+                     @mouseleave="is_hover=!is_hover"
                      @click="avaiable_points > 0   && item.is_can_check || item.is_checked ? checkItem(tree_index,item.id) : null"
                      class="skill-tree__item"
                      :class="[
@@ -64,6 +66,7 @@
                   <img draggable="false" :src="item.image"/>
 
                   <q-tooltip
+                    v-if="$q.screen.gt.xs"
                     transition-show="scale"
                     transition-hide="scale"
                     :content-style="{ background: '#000',border:'1px dashed #fff'}"
@@ -94,6 +97,12 @@
 
 
       </q-tab-panels>
+    <div class="mobile-description" v-if="is_hover">
+      <p class="text-center text-caption text-bold">{{name}}</p>
+      <p  class="text-center text-caption">{{description}}</p>
+    </div>
+  </div>
+
 </template>
 <script>
 
@@ -104,7 +113,8 @@ export default {
   data() {
     return {
       selectedWeapon:null,
-
+      description:'',
+      name:'',
       panel:'choose',
       is_hover:false,
       total_points:19,

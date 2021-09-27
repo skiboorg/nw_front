@@ -92,13 +92,13 @@
             </div>
           </router-link>
 
-          <!--          <q-card dark   class="bg-grey-10 rs-card  cursor-pointer q-mb-md">-->
-          <!--            <router-link  to="/companies/red-sky">-->
-          <!--              <q-card-section  class="text-center q-pa-none">-->
-          <!--               <q-img :ratio="16/9" src="~assets/rs.png"></q-img>-->
-          <!--              </q-card-section>-->
-          <!--            </router-link>-->
-          <!--          </q-card>-->
+                    <q-card dark   class="bg-grey-10 rs-card  cursor-pointer q-mb-md">
+                      <a target="_blank" href="https://discord.gg/eWx3fUKfYM" >
+                        <q-card-section  class="text-center ">
+                         <img  src="~assets/rs.png"/>
+                        </q-card-section>
+                      </a>
+                    </q-card>
 
           <CompanyCard
             v-if="guild.name_slug!=='red-sky'"

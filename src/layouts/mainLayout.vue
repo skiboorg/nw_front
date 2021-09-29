@@ -117,13 +117,9 @@
       <!--            <img src="~assets/izi.gif" alt="">-->
       <!--          </a>-->
       <div class="container">
-         <div class="flex items-center justify-between q-pt-lg">
-          <div class="social-banner q-mb-md">
-            <p class="q-mb-md-none q-mb-sm q-mr-md ">Получи лицензию NW</p>
-                <a class="q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active" href="https://vk.com/wall-206178035_50" target="_blank">Подписаться в ВК</a>
+         <div class=" q-pt-lg  row ">
 
-          </div>
-             <div class="social-banner q-mb-md">
+             <div class="col-12 col-md-4 social-banner q-mb-md ">
             <p class="q-mb-none q-mr-md ">Наш Discord</p>
                 <a class="q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline
                  q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable
@@ -131,9 +127,11 @@
                    href="https://discord.gg/K6uSpssV96" target="_blank">Присоединяйся</a>
 
           </div>
-           <div class="social-banner q-mb-md">
-            <p class="q-mb-md-none q-mb-sm q-mr-md ">Розыгрыш лицензии NW</p>
-                <a class=" q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active" href="https://t.me/nwfansru/46" target="_blank">Подписаться в ТГ</a>
+           <div class="col-12 col-md-7 offset-0 offset-md-1  social-banner q-mb-md ">
+            <p class="q-mb-md-none q-mb-sm q-mr-md ">Купить и продать золото NW </p>
+                <a class=" q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle
+                 bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active"
+                   href="https://izi.ru/new-world/currency/sell?utm_source=nwfans" target="_blank">Перейти</a>
 
           </div>
 

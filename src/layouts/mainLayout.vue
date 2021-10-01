@@ -117,26 +117,11 @@
       <!--            <img src="~assets/izi.gif" alt="">-->
       <!--          </a>-->
       <div class="container">
-         <div class=" q-pt-lg  row ">
+        <a href="https://izi.ru/new-world/currency/sell?utm_source=nwfans" target="_blank">
+            <img v-if="$q.screen.gt.xs" class="img" src="~assets/b-d.gif" alt="">
+        <img v-else class="img" src="~assets/b-m.gif" alt="">
+        </a>
 
-             <div class="col-12 col-md-4 social-banner q-mb-md ">
-            <p class="q-mb-none q-mr-md ">Наш Discord</p>
-                <a class="q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline
-                 q-btn--standard q-btn--rectangle bg-primary text-dark q-btn--actionable
-                 q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active"
-                   href="https://discord.gg/K6uSpssV96" target="_blank">Присоединяйся</a>
-
-          </div>
-           <div class="col-12 col-md-7 offset-0 offset-md-1  social-banner q-mb-md ">
-            <p class="q-mb-md-none q-mb-sm q-mr-md ">Купить и продать золото NW </p>
-                <a class=" q-btn q-py-sm q-px-md q-btn-item non-selectable no-outline q-btn--standard q-btn--rectangle
-                 bg-primary text-dark q-btn--actionable q-focusable q-hoverable q-btn--no-uppercase q-btn--wrap q-btn--active"
-                   href="https://izi.ru/new-world/currency/sell?utm_source=nwfans" target="_blank">Перейти</a>
-
-          </div>
-
-
-        </div>
       </div>
 
       <router-view />

@@ -11,7 +11,18 @@
         <q-item >
           <q-item-section>
             <h1 class="q-mb-none text-h6 text-bold text-center">Карта New World</h1>
+
           </q-item-section>
+
+        </q-item>
+        <q-item >
+
+
+            <a href="https://izi.ru/new-world/currency/sell?utm_source=nwfans" target="_blank">
+              <img class="img" src="~assets/b-m.gif" alt="">
+            </a>
+
+
         </q-item>
         <q-item clickable v-ripple >
           <q-item-section>
@@ -24,12 +35,12 @@
 
         <q-item clickable v-ripple v-for="(type,index) in categoryTypes" :key="type.id">
           <q-item-section>
-<!--            <q-toggle-->
-<!--              v-model="type.is_visible"-->
-<!--              @input="typeChange(index)"-->
-<!--              :style="{color: type.marker_color}"-->
-<!--              :label="`Показывать ${type.name.toLowerCase()}`"-->
-<!--            />-->
+            <!--            <q-toggle-->
+            <!--              v-model="type.is_visible"-->
+            <!--              @input="typeChange(index)"-->
+            <!--              :style="{color: type.marker_color}"-->
+            <!--              :label="`Показывать ${type.name.toLowerCase()}`"-->
+            <!--            />-->
             <q-toggle
               dense
               class="q-mb-sm q-px-md"
@@ -154,11 +165,11 @@ if (!process.env.SERVER) {
 export default {
   async preFetch ({store}) {
     if (store.state.data.poi.length === 0){
-       await store.dispatch('data/fetchPoi')
-       await store.dispatch('data/fetchResourses')
+      await store.dispatch('data/fetchPoi')
+      await store.dispatch('data/fetchResourses')
     }
   },
-   meta: {
+  meta: {
     title: 'Карта New World с ресурсами, интерактивная, на русском',
     // meta tags
     meta: {

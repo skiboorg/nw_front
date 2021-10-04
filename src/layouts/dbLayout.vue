@@ -119,8 +119,50 @@
             <img v-if="$q.screen.gt.xs" class="img" src="~assets/b-d.gif" alt="">
         <img v-else class="img" src="~assets/b-m.gif" alt="">
         </a>
-
+<div class="flex items-center ">
+          <q-icon size="30px" class="q-mr-md" color="primary" name="help" />
+          <h1 class="text-h5">New World База данных</h1>
+        </div>
+        <div class="database-wrapper">
+          <div class="side-menu">
+            <q-card dark>
+              <q-list dark  >
+                <q-item exact to="/database/all" clickable v-ripple>
+                  <q-item-section class="text-bold text-body1">Все предметы</q-item-section>
+                </q-item>
+                <q-expansion-item
+                  dark
+                  group="group"
+                  :header-class="$route.params.category_slug===category.name_slug ?
+                   'bg-grey-9 text-body1 text-bold text-primary' :
+                    'bg-grey-9 text-white text-body1 text-bold' "
+                  :label="category.name"
+                  :default-opened="$route.params.category_slug===category.name_slug"
+                  v-for="(category,index) in item_categories"
+                  :expand-icon-class="$route.params.category_slug===category.name_slug ?
+                   'text-primary' :
+                   'text-white'"
+                  :key="index">
+                  <q-item clickable v-ripple
+                          :to="`/database/${category.name_slug}/${subcat.name_slug}`"
+                          v-for="subcat in category.subcategories"
+                          :key="subcat.id">
+                    <q-item-section>
+                      <q-item-label class="text-bold">{{subcat.name}}</q-item-label>
+                      <q-item-label caption>{{subcat.name_en}}</q-item-label>
+                    </q-item-section>
+                    <q-item-section avatar>
+                      <q-icon :color="$route.params.subcategory_slug === subcat.name_slug ? 'primary' : 'white'" name="arrow_right" />
+                    </q-item-section>
+                  </q-item>
+                </q-expansion-item>
+              </q-list>
+            </q-card>
+          </div>
+          <router-view :key="$route.fullPath" />
+        </div>
       </div>
+
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[20, 90]">
         <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
       </q-page-scroller>

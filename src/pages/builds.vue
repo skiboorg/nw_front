@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between q-pt-lg q-mb-lg">
         <div class="flex items-center ">
           <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
-          <h1 class="text-h5">Билды New World</h1>
+          <h1 class="text-h5">{{!h1_add ? 'Билды' : ''}} New World {{h1_add ? ' | Билд ' + h1_add : ''}}</h1>
         </div>
         <q-btn to="/skills" :class="$q.screen.lt.sm ? 'full-width q-mb-md' : ''" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
       </div>
@@ -15,14 +15,18 @@
 
           <div class=" row q-mb-md">
 
-            <q-select class="col-lg-3 col-md-3 col-sm-6 col-xs-12 q-pr-lg-sm q-pr-md-sm q-pr-sm-sm q-pr-sm-none q-mb-sm-sm q-mb-xs-sm"
+            <q-select
+              @popup-hide = 'roleChanged'
+              class="col-lg-3 col-md-3 col-sm-6 col-xs-12 q-pr-lg-sm q-pr-md-sm q-pr-sm-sm q-pr-sm-none q-mb-sm-sm q-mb-xs-sm"
                       dark v-model="build_role" filled :options="build_role_options" label="Роль" />
             <q-select class="col-lg-3 col-md-3 col-sm-6 col-xs-12 q-pr-lg-sm q-pr-md-sm q-pr-sm-sm q-pr-sm-none q-mb-sm-sm q-mb-xs-sm"
                       dark v-model="build_purpose" filled :options="build_purpose_options" label="Назначение" />
-            <q-select class="col-lg-3 col-md-3 col-sm-6 col-xs-12 q-pr-lg-sm q-pr-md-sm q-pr-sm-sm q-pr-sm-none q-mb-sm-sm q-mb-xs-sm"
+            <q-select
+              @popup-hide = 'firstWeaponChanged'
+              class="col-lg-3 col-md-3 col-sm-6 col-xs-12 q-pr-lg-sm q-pr-md-sm q-pr-sm-sm q-pr-sm-none q-mb-sm-sm q-mb-xs-sm"
                       dark v-model="build_first_weapon" filled :options="build_first_weapon_options"  label="Первое оружие" />
             <q-select class="col-lg-3 col-md-3 col-sm-6 col-xs-12 q-pr-lg-sm q-pr-md-sm q-pr-sm-sm q-pr-sm-none q-mb-sm-sm q-mb-xs-sm"
-                      dark v-model="build_second_weapon" filled :options="build_first_weapon_options"  label="Второе оружие" />
+                      dark v-model="build_second_weapon" filled :options="build_second_weapon_options"  label="Второе оружие" />
 
           </div>
           <div class="flex wrap justify-between">
@@ -168,26 +172,57 @@
 import {mapGetters} from "vuex";
 
 export default {
-  async preFetch ({store}) {
+  async preFetch ({store,currentRoute,redirect}) {
+    store.dispatch('data/resetBuildsWeapon')
+    if (currentRoute.params.weapon){
+      store.dispatch('data/setBuildsWeapon',currentRoute.params.weapon)
+      if (!store.state.data.builds_weapon){
+        redirect({ path: '/404' })
+      }
+    }
+    if (currentRoute.params.role){
+      store.dispatch('data/setBuildsRole',currentRoute.params.role)
+       if (!store.state.data.builds_role){
+        redirect({ path: '/404' })
+      }
+    }
+
     if (store.state.data.builds.length === 0){
       await store.dispatch('data/fetchBuilds')
     }
   },
-  meta: {
-    title: 'New World Fans | Билды на русском',
+  // meta: {
+  //   title: 'New World Fans | Билды на русском',
+  //   // meta tags
+  //   meta: {
+  //     description: {name: 'description', content: 'Узнавай лучшие билды для New World первым! Рапира билд, копье билд, билд хила, билд мага, мушкет билд и многие другие лучшие билды! Заходи!'},
+  //     ogTitle: {
+  //       name: 'og:title',
+  //       template(ogTitle) {
+  //         return `New World Fans | Билды на русском`
+  //       }
+  //     }
+  //   }
+  // },
+  meta() {
+    return{
+       title: this.title,
     // meta tags
     meta: {
-      description: {name: 'description', content: 'Узнавай лучшие билды для New World первым! Рапира билд, копье билд, билд хила, билд мага, мушкет билд и многие другие лучшие билды! Заходи!'},
+      description: {name: 'description', content: this.description},
       ogTitle: {
         name: 'og:title',
         template(ogTitle) {
-          return `New World Fans | Билды на русском`
+          return this.title
         }
       }
     }
+    }
+
   },
   data () {
     return {
+      h1_add:'',
       is_filtered:false,
       is_loading:false,
       filtered_builds:[],
@@ -198,16 +233,61 @@ export default {
       build_purpose_options: [
         'ПвП', 'ПвЕ', 'Осады', 'Данжи', 'Универсальный'
       ],
+      // build_first_weapon_options:[
+      //   'Любое оружие','Меч и щит','Боевой молот','Секира','Топор','Лук','Мушкет','Рапира','Копье','Посох жизни','Посох огня','Ледяная перчатка'
+      // ],
       build_first_weapon_options:[
-        'Любое оружие','Меч и щит','Боевой молот','Секира','Топор','Лук','Мушкет','Рапира','Копье','Посох жизни','Посох огня','Ледяная перчатка'
+        {slug:'sword',label:'Меч и щит'},
+      {slug:'war_hammer',label:'Боевой молот'},
+      {slug:'great_axe',label:'Секира'},
+      {slug:'hatchet',label:'Топор'},
+      {slug:'bow',label:'Лук'},
+      {slug:'musket',label:'Мушкет'},
+      {slug:'rapier',label:'Рапира'},
+      {slug:'spear',label:'Копье'},
+      {slug:'life_staff',label:'Посох жизни'},
+      {slug:'fire_staff',label:'Посох огня'},
+      {slug:'ice_gauntlet',label:'Ледяная перчатка'}
       ],
       build_second_weapon_options:[
         'Любое оружие','Меч и щит','Боевой молот','Секира','Топор','Лук','Мушкет','Рапира','Копье','Посох жизни','Посох огня','Ледяная перчатка'
       ],
-      build_role_options:['Не указана','Танк','Хил','ДД','РДД']
+      build_role_options:[
+        {slug:'tank',label:'Танк'},
+      {slug:'heal',label:'Хил'},
+      {slug:'dd',label:'ДД'},
+      {slug:'rdd',label:'РДД'},
+      ]
     }
   },
+  async mounted() {
+    // this.title = 'New World Fans | Билды на русском'
+    // this.description = 'New World Fans | Билды на русском'
+
+    if (this.builds_weapon){
+      this.build_first_weapon = this.builds_weapon.name
+      this.h1_add = this.builds_weapon.name
+      await this.filterBuilds()
+    }
+
+    if (this.builds_role){
+      this.build_role = this.builds_role.name
+      this.h1_add = this.builds_role.name
+      await this.filterBuilds()
+    }
+
+
+
+  },
   methods: {
+    firstWeaponChanged(data){
+
+      this.$router.push(`/builds/weapon/${this.build_first_weapon.slug}`)
+
+    },
+    roleChanged(data){
+      this.$router.push(`/builds/role/${this.build_role.slug}`)
+    },
     async filterBuilds() {
       this.is_loading = true
       const response = await this.$api.post('/api/skill/builds_filter', {
@@ -229,7 +309,7 @@ export default {
     },
   },
     computed:{
-      ...mapGetters('data',['builds']),
+      ...mapGetters('data',['builds','builds_weapon','builds_role','title','description']),
     }
 
   }

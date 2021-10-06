@@ -124,7 +124,7 @@
 
       </div>
 
-      <router-view />
+      <router-view :key="$route.fullPath"/>
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[20, 90]">
         <q-btn fab size="md" icon="keyboard_arrow_up" color="primary" />
       </q-page-scroller>

@@ -16,12 +16,21 @@ const state = () => ({
   items:[],
   item:{},
   title:'',
-  description:''
+  description:'',
+  builds_weapon:'',
+  builds_role:'',
 
 
 })
 
 const mutations = {
+  updateBuildsWeapon(state,data){
+    state.builds_weapon = data
+  },
+  updateBuildsRole(state,data){
+    state.builds_role = data
+  },
+
   updateGuilds(state,data){
     state.guilds = data
   },
@@ -73,9 +82,6 @@ const mutations = {
     if (data.type === 'categoryChange'){
       state.resourses[data.index].is_visible = true
     }
-
-
-
       //state.resourses = data
     },
   updateFaq(state,data){
@@ -98,6 +104,55 @@ const mutations = {
 }
 
 const actions = {
+  resetBuildsWeapon({commit}){
+     let title = `New World Fans | Билды на русском `
+      let description = `Узнавай лучшие билды для New World первым! Рапира билд, копье билд, билд хила, билд мага, мушкет билд и многие другие лучшие билды! Заходи! `
+      commit('updateItem', {item:null,title,description})
+    commit('updateBuildsWeapon', '')
+   commit('updateBuildsRole', '')
+  },
+  setBuildsWeapon({commit},data){
+    console.log('set weapon',data)
+    let weapons = [
+      {slug:'sword',name:'Меч и щит'},
+      {slug:'war_hammer',name:'Боевой молот'},
+      {slug:'great_axe',name:'Секира'},
+      {slug:'hatchet',name:'Топор'},
+      {slug:'bow',name:'Лук'},
+      {slug:'musket',name:'Мушкет'},
+      {slug:'rapier',name:'Рапира'},
+      {slug:'spear',name:'Копье'},
+      {slug:'life_staff',name:'Посох жизни'},
+      {slug:'fire_staff',name:'Посох огня'},
+      {slug:'ice_gauntlet',name:'Ледяная перчатка'}
+      ]
+    let weapon = weapons.find(x=>x.slug===data)
+    if (weapon){
+      commit('updateBuildsWeapon', weapon)
+      let title = `New World ${weapon.name.toLowerCase()} билд для PVE и PVP `
+      let description = `Все самые актуальные билды для ${weapon.name.toLowerCase()} в New World, заходи, забирай! `
+      commit('updateItem', {weapon,title,description})
+    }
+
+  },
+  setBuildsRole({commit},data){
+    console.log('set role',data)
+    let roles=[
+      {slug:'tank',name:'Танк'},
+      {slug:'heal',name:'Хил'},
+      {slug:'dd',name:'ДД'},
+      {slug:'rdd',name:'РДД'},
+    ]
+    let role = roles.find(x=>x.slug===data)
+    if (role){
+      commit('updateBuildsRole', role)
+      let title = `New World билд ${role.name}  для PVE и PVP `
+      let description = `Все самые актуальные ${role.name.toLowerCase()}билды в New World, заходи, забирай! `
+      commit('updateItem', {role,title,description})
+    }
+
+  },
+
   async fetchItems({commit,getters},data){
     if (data.type==='all'){
       const response = await api.get(`api/item/items?type=a${data.page?'&page='+data.page :''}`)
@@ -220,6 +275,8 @@ export const getters = {
   item: (state) => state.item,
   title: (state) => state.title,
   description: (state) => state.description,
+  builds_weapon: (state) => state.builds_weapon,
+  builds_role: (state) => state.builds_role,
 
 
 }

@@ -114,23 +114,23 @@ const actions = {
   setBuildsWeapon({commit},data){
     console.log('set weapon',data)
     let weapons = [
-      {slug:'sword',name:'Меч и щит'},
-      {slug:'war_hammer',name:'Боевой молот'},
-      {slug:'great_axe',name:'Секира'},
-      {slug:'hatchet',name:'Топор'},
-      {slug:'bow',name:'Лук'},
-      {slug:'musket',name:'Мушкет'},
-      {slug:'rapier',name:'Рапира'},
-      {slug:'spear',name:'Копье'},
-      {slug:'life_staff',name:'Посох жизни'},
-      {slug:'fire_staff',name:'Посох огня'},
-      {slug:'ice_gauntlet',name:'Ледяная перчатка'}
+      {slug:'sword',label:'Меч и щит'},
+      {slug:'war_hammer',label:'Боевой молот'},
+      {slug:'great_axe',label:'Секира'},
+      {slug:'hatchet',label:'Топор'},
+      {slug:'bow',label:'Лук'},
+      {slug:'musket',label:'Мушкет'},
+      {slug:'rapier',label:'Рапира'},
+      {slug:'spear',label:'Копье'},
+      {slug:'life_staff',label:'Посох жизни'},
+      {slug:'fire_staff',label:'Посох огня'},
+      {slug:'ice_gauntlet',label:'Ледяная перчатка'}
       ]
     let weapon = weapons.find(x=>x.slug===data)
     if (weapon){
       commit('updateBuildsWeapon', weapon)
-      let title = `New World ${weapon.name.toLowerCase()} билд для PVE и PVP `
-      let description = `Все самые актуальные билды для ${weapon.name.toLowerCase()} в New World, заходи, забирай! `
+      let title = `New World ${weapon.label.toLowerCase()} билд для PVE и PVP `
+      let description = `Все самые актуальные билды для ${weapon.label.toLowerCase()} в New World, заходи, забирай! `
       commit('updateItem', {weapon,title,description})
     }
 
@@ -138,16 +138,16 @@ const actions = {
   setBuildsRole({commit},data){
     console.log('set role',data)
     let roles=[
-      {slug:'tank',name:'Танк'},
-      {slug:'heal',name:'Хил'},
-      {slug:'dd',name:'ДД'},
-      {slug:'rdd',name:'РДД'},
+      {slug:'tank',label:'Танк'},
+      {slug:'heal',label:'Хил'},
+      {slug:'dd',label:'ДД'},
+      {slug:'rdd',label:'РДД'},
     ]
     let role = roles.find(x=>x.slug===data)
     if (role){
       commit('updateBuildsRole', role)
-      let title = `New World билд ${role.name}  для PVE и PVP `
-      let description = `Все самые актуальные ${role.name.toLowerCase()}билды в New World, заходи, забирай! `
+      let title = `New World билд ${role.label}  для PVE и PVP `
+      let description = `Все самые актуальные ${role.label.toLowerCase()}билды в New World, заходи, забирай! `
       commit('updateItem', {role,title,description})
     }
 

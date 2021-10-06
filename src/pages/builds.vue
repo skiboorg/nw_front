@@ -5,6 +5,7 @@
         <div class="flex items-center ">
           <q-icon size="30px" class="q-mr-md" color="primary" name="app_registration" />
           <h1 class="text-h5">{{!h1_add ? 'Билды' : ''}} New World {{h1_add ? ' | Билд ' + h1_add : ''}}</h1>
+
         </div>
         <q-btn to="/skills" :class="$q.screen.lt.sm ? 'full-width q-mb-md' : ''" icon="add" no-caps color="primary" text-color="dark" label="Создать билд"/>
       </div>
@@ -229,7 +230,7 @@ export default {
       build_purpose:'Универсальный',
       build_first_weapon:'Любое оружие',
       build_second_weapon:'Любое оружие',
-      build_role:'Не указана',
+      build_role:{slug:'',label:'Не указана'},
       build_purpose_options: [
         'ПвП', 'ПвЕ', 'Осады', 'Данжи', 'Универсальный'
       ],
@@ -265,14 +266,14 @@ export default {
     // this.description = 'New World Fans | Билды на русском'
 
     if (this.builds_weapon){
-      this.build_first_weapon = this.builds_weapon.name
-      this.h1_add = this.builds_weapon.name
+      this.build_first_weapon = this.builds_weapon
+      this.h1_add = this.builds_weapon.label
       await this.filterBuilds()
     }
 
     if (this.builds_role){
-      this.build_role = this.builds_role.name
-      this.h1_add = this.builds_role.name
+      this.build_role = this.builds_role
+      this.h1_add = this.builds_role.label
       await this.filterBuilds()
     }
 
@@ -282,18 +283,24 @@ export default {
   methods: {
     firstWeaponChanged(data){
 
+    if (!this.builds_role){
       this.$router.push(`/builds/weapon/${this.build_first_weapon.slug}`)
+    }
+
 
     },
     roleChanged(data){
-      this.$router.push(`/builds/role/${this.build_role.slug}`)
+      if (!this.builds_weapon){
+       this.$router.push(`/builds/role/${this.build_role.slug}`)
+      }
+
     },
     async filterBuilds() {
       this.is_loading = true
       const response = await this.$api.post('/api/skill/builds_filter', {
-        build_role: this.build_role,
+        build_role: this.build_role.label,
         build_purpose: this.build_purpose,
-        build_first_weapon: this.build_first_weapon,
+        build_first_weapon: this.build_first_weapon.label,
         build_second_weapon: this.build_second_weapon,
       })
       this.filtered_builds = response.data
@@ -301,11 +308,13 @@ export default {
       this.is_loading = false
     },
     resetFilters() {
-      this.build_purpose = 'Универсальный'
-      this.build_first_weapon = 'Любое оружие'
-      this.build_second_weapon = 'Любое оружие'
-      this.build_role = 'Не указана'
-      this.is_filtered = false
+      this.$store.dispatch('data/resetBuildsWeapon')
+      this.$router.push('/builds')
+      // this.build_purpose = 'Универсальный'
+      // this.build_first_weapon = 'Любое оружие'
+      // this.build_second_weapon = 'Любое оружие'
+      // this.build_role = 'Не указана'
+      // this.is_filtered = false
     },
   },
     computed:{

@@ -100,7 +100,7 @@ module.exports = function (/* ctx */) {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'ru', // Quasar language pack
       config: {
-        loadingBar: { color:'primary' }
+
       },
 
       // Possible values for "importStrategy":
@@ -121,8 +121,7 @@ module.exports = function (/* ctx */) {
         'Cookies',
         'Notify',
         'Loading',
-        'Meta',
-         'LoadingBar'
+        'Meta'
       ]
     },
 

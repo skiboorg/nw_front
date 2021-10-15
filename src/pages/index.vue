@@ -43,33 +43,6 @@
           <!--            <img style="width: 100%; height: auto" src="~assets/izi.gif" alt="">-->
           <!--          </a>-->
 
-          <div class="flex items-center ">
-            <q-icon size="30px" class="q-mr-md" color="primary" name="people_alt" />
-            <h3 class="text-h5">Социальные сети</h3>
-          </div>
-
-          <q-card dark>
-            <q-list >
-
-              <a :href="item.url" target="_blank" v-for="item in socials" :key="item.id">
-                <q-item clickable v-ripple class="row">
-
-                  <q-item-section class="col-1 gt-sm" avatar>
-                    <q-avatar rounded>
-                      <img :src="item.logo">
-                    </q-avatar>
-                  </q-item-section>
-                  <q-item-section class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">{{item.name}}</q-item-section>
-                  <q-item-section class="col-lg-4 col-md-6 col-sm-6 col-xs-6" >{{item.description}}</q-item-section>
-                  <q-item-section class="text-center gt-sm">{{item.type}}</q-item-section>
-
-
-
-
-                </q-item>
-              </a>
-            </q-list>
-          </q-card>
 
           <div class="flex items-center no-wrap">
             <q-icon size="30px" class="q-mr-md" color="primary" name="campaign" />
@@ -83,6 +56,42 @@
           />
         </div>
         <div class="page-right">
+
+          <div class="flex items-center ">
+            <q-icon size="30px" class="q-mr-md" color="primary" name="monitor" />
+            <h3 class="text-h5">Популярные стримеры</h3>
+          </div>
+
+          <q-card dark>
+            <q-list separator >
+
+
+                <q-item   class="row q-py-md" v-for="item in socials" :key="item.id">
+
+                  <q-item-section class="col-6" avatar>
+                    <q-avatar rounded class="q-mb-sm">
+                      <img :src="item.logo">
+                    </q-avatar>
+                   <q-item-section >{{item.name}}</q-item-section>
+                  </q-item-section>
+
+                    <q-item-section class="col-6" >
+
+                   <q-item-section >
+                     <p class="q-mb-sm text-bold" v-if="item.url_youtube">  <a class="text-title cursor-pointer" :href="item.url_youtube" target="_blank">YouTube</a></p>
+                   <p class="q-mb-none text-bold"  v-if="item.url_twitch"><a class="text-title cursor-pointer" :href="item.url_twitch" target="_blank">Twitch</a> </p>
+</q-item-section>
+
+                  </q-item-section>
+
+
+
+
+
+                </q-item>
+
+            </q-list>
+          </q-card>
 
           <router-link to="/companies">
             <div class="flex items-center ">
